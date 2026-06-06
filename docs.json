@@ -8,48 +8,50 @@
     "dark": "#0C447C"
   },
   "favicon": "/favicon.svg",
-  "navigation": [
-    {
-      "group": "Getting Started",
-      "icon": "rocket",
-      "pages": [
-        "introduction",
-        "getting-started/installation",
-        "getting-started/quick-start"
-      ]
-    },
-    {
-      "group": "Configuration",
-      "icon": "gear",
-      "pages": [
-        "configuration/llm-providers",
-        "configuration/test-count"
-      ]
-    },
-    {
-      "group": "Features",
-      "icon": "star",
-      "pages": [
-        "features/invest-scoring",
-        "features/manual-tests",
-        "features/automated-tests"
-      ]
-    },
-    {
-      "group": "Security",
-      "icon": "shield",
-      "pages": [
-        "security/data-privacy"
-      ]
-    },
-    {
-      "group": "Changelog",
-      "icon": "clock",
-      "pages": [
-        "changelog"
-      ]
-    }
-  ],
+  "navigation": {
+    "groups": [
+      {
+        "group": "Getting Started",
+        "icon": "rocket",
+        "pages": [
+          "introduction",
+          "getting-started/installation",
+          "getting-started/quick-start"
+        ]
+      },
+      {
+        "group": "Configuration",
+        "icon": "gear",
+        "pages": [
+          "configuration/llm-providers",
+          "configuration/test-count"
+        ]
+      },
+      {
+        "group": "Features",
+        "icon": "star",
+        "pages": [
+          "features/invest-scoring",
+          "features/manual-tests",
+          "features/automated-tests"
+        ]
+      },
+      {
+        "group": "Security",
+        "icon": "shield",
+        "pages": [
+          "security/data-privacy"
+        ]
+      },
+      {
+        "group": "Changelog",
+        "icon": "clock",
+        "pages": [
+          "changelog"
+        ]
+      }
+    ]
+  },
   "logo": {
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg"
