@@ -1,0 +1,48 @@
+---
+title: "LLM Providers"
+description: "Connect your AI endpoint. Supported providers, configuration, and security notes."
+icon: "key"
+---
+
+# LLM Providers
+
+TestForge uses a **Bring Your Own Key (BYOK)** model. You connect your own LLM endpoint — TestForge never processes your data on its servers.
+
+## Supported providers
+
+| Provider | Type | Data residency |
+| --- | --- | --- |
+| **Azure AI Foundry** | Browser-direct | ✅ Stays in your Azure tenant |
+| **Azure OpenAI Service** | Browser-direct | ✅ Stays in your Azure tenant |
+| **OpenAI** | Browser-direct | ⚠️ Leaves your tenant |
+| **Mistral** | Browser-direct | ⚠️ Leaves your tenant |
+| **Gemini** | Browser-direct | ⚠️ Leaves your tenant |
+| **Anthropic** | Via client proxy | ⚠️ Leaves your tenant |
+
+<Warning>
+  For OpenAI, Mistral, Gemini, and Anthropic, your user story content is sent to an external API outside your Azure tenant. TestForge displays a non-dismissible warning before saving.
+</Warning>
+
+## Azure AI Foundry (recommended)
+
+Endpoint format: `https://<your-resource>.cognitiveservices.azure.com`
+
+Compatible models: `gpt-4.1-mini`, `gpt-4.1`, `gpt-4o`, `gpt-4o-mini`.
+
+<Note>
+  Models using the Responses API (`gpt-5.1-codex-*`, `o3`, `o4-mini`) are not yet supported. Use `gpt-4.1-mini` for best results.
+</Note>
+
+## Azure OpenAI Service
+
+Endpoint format: `https://<your-resource>.openai.azure.com`
+
+Configuration follows the same steps as Azure AI Foundry.
+
+## Anthropic (via client proxy)
+
+Anthropic blocks browser-direct CORS calls. Deploy the open-source proxy template in your tenant (Azure Function or Cloudflare Worker) and enter your proxy URL in the Configuration tab. The proxy template is available in the [TestForge repository](https://github.com/AlexThibaud1976/testforge-ado).
+
+## Token cost estimate
+
+A typical session (score \+ analysis \+ 9 manual tests \+ Playwright code) consumes approximately **15,000–25,000 tokens**. At `gpt-4.1-mini` pricing on Azure, this is roughly **€0.05–0.10 per session**.

@@ -1,0 +1,45 @@
+---
+title: "Manual Tests & Gherkin"
+description: "Generate, view, edit, and push manual test cases to ADO — no Test Plans licence required."
+icon: "list-check"
+---
+
+# Manual Tests & Gherkin
+
+## Viewing tests: Steps vs Gherkin
+
+Use the **Steps / Gherkin pills** at the top of the test list to switch view mode globally (all tests at once). The pills only appear if at least one generated test has a Gherkin scenario.
+
+## Export formats
+
+### Classic steps
+
+Each test is pushed with the standard ADO step format: Action \+ Expected Result columns. If a Gherkin scenario exists, it is also written to `System.Description` as a bonus.
+
+### Gherkin BDD
+
+Each Gherkin line becomes an ADO step:
+
+- `Given` / `When` / `And` (before Then) → **ActionStep**
+- `Then` / `And` / `But` (after Then) → **ValidateStep** with `Verify:` in the action field
+
+The full scenario is also written to `System.Description`.
+
+<Note>
+  Gherkin step mapping uses standard English keywords. French Gherkin keywords fall back silently to classic step format.
+</Note>
+
+## Pushing to ADO
+
+Tests are pushed via the **Tested By** relation. They appear in the **Test Coverage** tab of the work item.
+
+<Info>
+  You do **not** need an Azure DevOps **Test Plans** licence to push manual tests. A Basic licence is sufficient.
+</Info>
+
+## Editing tests before push
+
+- Edit the **title** inline
+- Change the **priority** via the P1–P4 dropdown
+- **Add or remove steps** using `+ Step` and ×
+- **Delete a test case** with the × at the top right of the card

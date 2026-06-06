@@ -1,0 +1,79 @@
+---
+title: "Changelog"
+description: "What's new in each TestForge release."
+icon: "sparkles"
+---
+
+# Changelog
+
+## v1.14.0 — 2026-06-06
+
+**Test count control**
+
+- New `TestCountPanel` in the QA Hub Manual Tests tab.
+- **Simple mode**: global slider 2–32 with live distribution pills (e.g. `3 Nominal · 4 Boundary · 2 Equivalence · 2 Negative`).
+- **Advanced mode**: individual sliders per typology (1–8 each), running total displayed.
+- Preferences persisted to ADO user account (`test-count-config-v1`).
+- `generateTestCasesByTypology()` accepts optional `testCountConfig` — fully backwards-compatible.
+
+---
+
+## v1.13.0 — 2026-06-06
+
+**Polish & accessibility**
+
+- ⚙️ Config button in work item panel now navigates correctly to the Hub Config tab.
+- Accent teal button contrast fixed: `#1D9E75` \+ white text — contrast ratio 4.8:1 (WCAG AA). New token `--accent-btn`.
+- Inline code blocks in Help tab: `--surface-hover` background — contrast ratio 15:1 (WCAG AAA).
+- All inline buttons in `PoPanel` and `PushPanel` migrated to Button design system (`primary`, `ghost-blue`, `pill-on`, `pill-off`).
+
+---
+
+## v1.12.0 — 2026-06-05
+
+**Design System Refresh — Direction B “SaaS Arc”**
+
+- Typography: **Space Grotesk** replaces Segoe UI.
+- Palette: marine `#042C53` for hero surfaces, teal accent `#22d3a5` for active states.
+- `HeuristicScoreCard`: hero card with 42px score, coloured level badge.
+- `QaHubView`: marine topbar with active provider badge.
+- New `Card` variants: `hero` and `accent`. Visual regression guard `T-DS-16`.
+
+---
+
+## v1.11.0 — 2026-06-05
+
+**Branding, documentation, unified config**
+
+- Marketplace icon (`static/icon.png` 128×128) and new `overview.md`.
+- **Help tab** in QA Hub: user documentation bundled as Markdown (zero network, offline-ready).
+- **Unified configuration**: work item panel no longer embeds a `ConfigScreen`. Non-configured state shows a CTA that navigates to the Hub Config tab.
+
+---
+
+## v1.9.0 — 2026-06-05
+
+**Gherkin export, inline INVEST suggestions, AC format toggle**
+
+- `InvestSuggestion.criterion`: suggestions linked to their INVEST criterion. Click a criterion cell to expand inline.
+- **Export format toggle** (Classic / Gherkin BDD): `Given`/`When` → ActionStep, `Then`/`And`/`But` → ValidateStep `Verify:`.
+- **Steps/Gherkin pills** in `TestCaseList`: global toggle for all cases in the current US.
+- **AC format toggle** (Bullet list / Gherkin per AC): persisted per user.
+
+---
+
+## v1.6.0 — 2026-06-04
+
+**Providers, Gherkin, code quality**
+
+- **6 LLM providers**: OpenAI, Mistral, Gemini (browser-direct) \+ Anthropic (client proxy).
+- **Gherkin** on manual tests: `gherkinScenario` field, pushed to `System.Description`.
+- **8 test frameworks**: Cypress JS, Playwright Python/.NET, Cucumber JS/Java/Python added.
+- **Code quality score**: 5-dimension local score with warnings and Regenerate button.
+- `stripHtml` fix for ADO rich-text fields.
+
+---
+
+<Info>
+  For the full commit history, see the [GitHub repository](https://github.com/AlexThibaud1976/testforge-ado).
+</Info>

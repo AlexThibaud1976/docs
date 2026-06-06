@@ -1,11 +1,11 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "TestForge",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#1D9E75",
+    "light": "#22d3a5",
+    "dark": "#0C447C"
   },
   "favicon": "/favicon.svg",
   "navigation": {
@@ -18,20 +18,48 @@
         ]
       }
     ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    "groups": [
+      {
+        "group": "Getting Started",
+        "icon": "rocket",
+        "pages": [
+          "introduction",
+          "getting-started/installation",
+          "getting-started/quick-start"
+        ]
+      },
+      {
+        "group": "Configuration",
+        "icon": "gear",
+        "pages": [
+          "configuration/llm-providers",
+          "configuration/test-count"
+        ]
+      },
+      {
+        "group": "Features",
+        "icon": "star",
+        "pages": [
+          "features/invest-scoring",
+          "features/manual-tests",
+          "features/automated-tests"
+        ]
+      },
+      {
+        "group": "Security",
+        "icon": "shield",
+        "pages": [
+          "security/data-privacy"
+        ]
+      },
+      {
+        "group": "Changelog",
+        "icon": "clock",
+        "pages": [
+          "changelog"
+        ]
+      }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",
@@ -40,14 +68,14 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "https://testforge.info",
+        "label": "testforge.info"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+      "label": "Install free →",
+      "href": "https://marketplace.visualstudio.com/items?itemName=AlexThibaud.testforge-ado"
     }
   },
   "contextual": {
@@ -64,9 +92,8 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "github": "https://github.com/AlexThibaud1976"
     }
-  }
+  },
+  "description": "AI-powered INVEST scoring, user story improvement, and test generation for Azure DevOps. Your data never leaves your tenant."
 }
