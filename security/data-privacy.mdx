@@ -1,0 +1,48 @@
+---
+title: "Data Privacy & Security"
+description: "How TestForge handles your data. The short answer: it doesn't."
+icon: "lock"
+---
+
+# Data Privacy & Security
+
+<Info>
+  TestForge servers **never receive** your user stories, acceptance criteria, generated tests, or test code. The extension makes zero outbound calls to AT Conseil / TestForge infrastructure.
+</Info>
+
+## Data flow by operation
+
+| Operation | Data path |
+| --- | --- |
+| Heuristic INVEST score | Calculated entirely in the browser. No network call. |
+| LLM analysis / generation | Browser → Your LLM endpoint only. TestForge is not in this path. |
+| Configuration storage | ADO Extension Data Service, scoped to your user account. |
+| Test code push | Browser → Your ADO Repos via ADO REST API. |
+
+## Public providers
+
+When you configure OpenAI, Mistral, Gemini, or Anthropic, your work item content travels to an API outside your tenant. TestForge displays a **non-dismissible warning** before saving this configuration.
+
+For regulated environments (banking, public sector, healthcare), use **Azure AI Foundry** or **Azure OpenAI Service**.
+
+## Anthropic proxy
+
+The proxy template we provide is:
+
+- **Open-source and auditable** (MIT licence)
+- Deployed **in your own tenant** (Azure Function or Cloudflare Worker)
+- **AT Conseil never operates this proxy** — you own and control it entirely
+
+## ADO permission scopes
+
+| Scope | Purpose |
+| --- | --- |
+| `vso.work_full` | Read work items (scoring) and write (writeback \+ test linking) |
+| `vso.code_write` | Push generated test code to Repos |
+| `vso.extension.data_write` | Store LLM configuration in ADO Extension Data Service |
+
+TestForge does **not** request access to: pipelines, builds, releases, project settings, user management, or billing.
+
+## Responsible disclosure
+
+Contact [security@testforge.info](mailto:security@testforge.info). We aim to respond within 48 hours.

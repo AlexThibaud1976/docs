@@ -1,0 +1,71 @@
+---
+title: "Quick Start"
+description: "Score your first user story and generate tests in under 5 minutes."
+icon: "play"
+---
+
+# Quick Start
+
+## 1 — Score a user story
+
+<Steps>
+  <Step title="Open a work item">
+    Navigate to any **User Story** in your ADO backlog. Click the **TestForge** tab. The heuristic INVEST score appears immediately — offline, no LLM required.
+  </Step>
+  <Step title="Read the score">
+    - **≥ 70 — Ready**: story can enter the sprint
+    - **40–69 — Needs work**: one or more criteria are weak
+    - **\< 40 — Critical**: story needs significant rework
+
+    The I N V E S T grid shows ✓ / ⚠ / ✗ per criterion. Click any criterion cell to expand inline suggestions.
+  </Step>
+  <Step title="Run the LLM analysis (optional)">
+    Click **Analyse (INVEST)** for a deep analysis with justifications and actionable suggestions per criterion.
+  </Step>
+</Steps>
+
+## 2 — Improve the user story
+
+<Steps>
+  <Step title="Choose your AC format">
+    Toggle **Bullet list** or **Gherkin per AC** above the Analyse button.
+  </Step>
+  <Step title="Improve and review">
+    Click **Improve the US**. A side-by-side diff shows exactly what changed before anything is saved.
+  </Step>
+  <Step title="Write back to ADO">
+    Click **Write back to ADO** to update the work item instantly.
+  </Step>
+</Steps>
+
+## 3 — Generate manual tests
+
+<Steps>
+  <Step title="Open the QA Hub">
+    Go to **Boards → TestForge** in the project sidebar.
+  </Step>
+  <Step title="Set typologies and count">
+    Select **Nominal**, **Boundary**, **Equivalence**, and/or **Negative**. Use the slider to set the total test count (2–32).
+  </Step>
+  <Step title="Generate and push">
+    Select a user story, click **Generate test cases**, review the results, then click **Push to ADO**. No Test Plans licence required.
+  </Step>
+</Steps>
+
+## 4 — Generate automated test code
+
+<Steps>
+  <Step title="Switch to Automated Tests tab">
+    In the QA Hub, click **Automated Tests**.
+  </Step>
+  <Step title="Choose a framework">
+    Playwright TS/Python/.NET, Selenium Java, Cypress JS, or Cucumber (JS/Java/Python).
+  </Step>
+  <Step title="Generate, review quality score, push">
+    Click **Generate code**. Review the 5-dimension quality score. Click **Regenerate** if needed — warnings are automatically sent to the LLM. Then push to Repos.
+  </Step>
+</Steps>
+
+<Check>
+  You've completed the full TestForge workflow: score → improve → manual tests → automated test code.
+</Check>

@@ -1,0 +1,48 @@
+---
+title: "Test Count & Typologies"
+description: "Control how many tests TestForge generates and how they're distributed across typologies."
+icon: "sliders"
+---
+
+# Test Count & Typologies
+
+## Typologies
+
+| Typology | What it covers |
+| --- | --- |
+| **Nominal** | Happy path — expected, successful behaviour |
+| **Boundary / Limits** | Edge values: minimum, maximum, just-outside-bounds |
+| **Equivalence** | Representative partitions |
+| **Negative** | Invalid input, error handling, unexpected states |
+
+TestForge runs one LLM call per selected typology in parallel — a failed pass is non-blocking.
+
+## Simple mode (default)
+
+One global slider: **total number of tests (2–32)**. Distribution is proportional and shown live in pills below the slider:
+
+```text
+3 Nominal · 4 Boundary · 2 Equivalence · 2 Negative
+```
+
+## Advanced mode
+
+Click **Customise per typology** to set an individual slider for each selected typology.
+
+- Range: **1–8 tests per typology**
+- Maximum total: **32 tests**
+- Running total displayed in real time
+
+Click **Back to simple mode** to return. Your advanced configuration is preserved.
+
+## Persisted preferences
+
+Both the mode (simple/advanced) and the values are **saved to your ADO user account** (`test-count-config-v1`). They persist across sessions and browser reloads.
+
+<Tip>
+  A good starting point: **2 Nominal · 3 Boundary · 2 Equivalence · 2 Negative = 9 tests**. This covers the critical paths without creating noise.
+</Tip>
+
+## Why we cap at 32
+
+Quality over quantity. A well-scoped user story (INVEST: Small) typically warrants 5–12 test cases. Beyond that, cases tend to be redundant — they pollute your ADO suite and increase maintenance cost without improving coverage.

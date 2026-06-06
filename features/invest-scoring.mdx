@@ -1,0 +1,42 @@
+---
+title: "INVEST Scoring"
+description: "How TestForge scores user stories against the INVEST framework."
+icon: "chart-bar"
+---
+
+# INVEST Scoring
+
+## The six criteria
+
+| Letter | Criterion | What it checks |
+| --- | --- | --- |
+| **I** | Independent | Can the story be delivered without being blocked by another? |
+| **N** | Negotiable | Can the scope be adjusted without losing core value? |
+| **V** | Valuable | Does it deliver clear, measurable value? |
+| **E** | Estimable | Can the team estimate the effort with confidence? |
+| **S** | Small | Does it fit within one sprint? |
+| **T** | Testable | Are the acceptance criteria concrete and verifiable? |
+
+## Two scoring modes
+
+### Heuristic score (offline, instant)
+
+Calculated **locally, without any LLM call**. Uses structural signals: persona format (`As a...`), goal (`I want...`), purpose (`so that...` or `to...`), AC presence and format, description length and clarity.
+
+The heuristic score is always calculated on the **original user story** — it does not change after an LLM improvement is written back to ADO.
+
+### LLM analysis (deep)
+
+Click **Analyse (INVEST)** for a full LLM-powered analysis. Each criterion receives a status, justification, and inline suggestions. Click any criterion cell to expand its suggestions.
+
+## Score levels
+
+| Score | Level |
+| --- | --- |
+| 70–100 | ✅ **Ready** — can enter the sprint |
+| 40–69 | ⚠️ **Needs work** — one or more criteria weak |
+| 0–39 | ❌ **Critical** — needs rework before estimation |
+
+## Language invariant
+
+All generated content is produced in the **same language as the source story**. If your story is in French, the output is in French. TestForge never silently translates.

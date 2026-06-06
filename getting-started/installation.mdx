@@ -1,0 +1,43 @@
+---
+title: "Installation"
+description: "Install TestForge on your Azure DevOps organisation in under 2 minutes."
+icon: "download"
+---
+
+# Installation
+
+## Prerequisites
+
+- **Azure DevOps Services** (cloud). ADO Server on-premises support is coming in 2027.
+- **ADO Basic licence** — no Test Plans licence required for manual test push.
+- A browser with access to the Visual Studio Marketplace.
+
+<Note>
+  You do **not** need an LLM endpoint to install. The heuristic INVEST score works offline immediately after installation.
+</Note>
+
+## Steps
+
+<Steps>
+  <Step title="Install from the Marketplace">
+    Open the [TestForge Marketplace page](https://marketplace.visualstudio.com/items?itemName=AlexThibaud.testforge-ado), click **Get it free**, select your organisation, and confirm.
+  </Step>
+  <Step title="Verify the installation">
+    Open any **User Story** work item. Click the **TestForge** tab. You should see a heuristic INVEST score within one second — no configuration needed.
+  </Step>
+  <Step title="Configure your LLM provider">
+    Open the **TestForge Hub** (Boards → TestForge), go to the **Configuration** tab, enter your endpoint and API key, click **Test connection**, then **Save**.
+  </Step>
+</Steps>
+
+## ADO permission scopes
+
+| Scope | Purpose |
+| --- | --- |
+| `vso.work_full` | Read and write work items |
+| `vso.code_write` | Push generated test code to Repos |
+| `vso.extension.data_write` | Store your LLM configuration securely |
+
+<Tip>
+  Your API key is stored in the ADO Extension Data Service, scoped to your user account. TestForge never transmits it to our servers.
+</Tip>
