@@ -6,6 +6,25 @@ icon: "sparkles"
 
 # Changelog
 
+## v1.15.1 — 2026-06-06
+
+**Hotfix — chargement hub (GraphRestClient)**
+
+- `dor-admin-check.ts` : suppression de `GraphRestClient` et du scope `vso.graph` non déclaré. `isProjectAdmin()` utilise désormais uniquement `SDK.getPageContext()` (synchrone, zéro réseau). Corrige le spinner infini au chargement du hub introduit par la Phase 13.
+
+---
+
+## v1.15.0 — 2026-06-06
+
+**Quality Gate & Definition of Ready (EPIC M)**
+
+- **US-M1 — Configuration DoR** : seuil INVEST configurable par projet (0–100, défaut 70) + critères INVEST individuels obligatoires/optionnels. Stockage scope Collection (`doR-config-{projectId}`). Héritage orga → projet en deux passes. Écriture réservée aux Project Admins ADO.
+- **US-M2 — Enforcement (niveaux 1 + 2)** : bannière warning dans le panneau PO si US non conforme. Bouton "Générer les tests" grisé dans le QA Hub si US sous le seuil ou critère obligatoire manquant. Gate basée sur le score heuristique offline — zéro LLM requis.
+- **US-M3 — Dashboard Qualité backlog** : 4e onglet dans le QA Hub. Liste des US du sprint avec score heuristique, statut DoR ✓/✗ et critères défaillants. Recalcul à la volée, aucune donnée stockée.
+- `DorService.checkCompliance()` : fonction pure, testée avec 90 %+ de couverture sur `src/config/`.
+
+---
+
 ## v1.14.0 — 2026-06-06
 
 **Test count control**
