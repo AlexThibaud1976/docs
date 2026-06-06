@@ -14,7 +14,7 @@
         "group": "Getting Started",
         "icon": "rocket",
         "pages": [
-          "introduction",
+          "index",
           "getting-started/installation",
           "getting-started/quick-start"
         ]
@@ -52,12 +52,6 @@
       }
     ]
   },
-  "redirects": [
-    {
-      "source": "/",
-      "destination": "/introduction"
-    }
-  ],
   "logo": {
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg"
