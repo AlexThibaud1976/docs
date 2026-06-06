@@ -6,6 +6,17 @@ icon: "sparkles"
 
 # Changelog
 
+## v1.16.0 — 2026-06-06
+
+**Traçabilité ID US réel \+ Guide Next Steps**
+
+- **Annotations de traçabilité** : l'ID réel de la US (`@us-1234`) remplace le placeholder `@us-0`. Le `workItemId` est désormais transmis jusqu'au prompt builder.
+- **Score qualité — dimension traceability** : `@us-0` et `@us-unknown` ne comptent plus comme annotation valide (seuls les IDs \> 0 sont acceptés).
+- **Accordéon "How to use this code"** : affiché inline après chaque génération — commande d'installation, structure de répertoires et commande d'exécution spécifiques au framework sélectionné.
+- **Lien "Full setup guide →"** : lien direct vers la section du framework dans [la documentation](https://docs.testforge.info/features/automated-tests).
+
+---
+
 ## v1.15.1 — 2026-06-06
 
 **Hotfix — chargement hub (GraphRestClient)**
@@ -18,10 +29,10 @@ icon: "sparkles"
 
 **Quality Gate & Definition of Ready (EPIC M)**
 
-- **US-M1 — Configuration DoR** : seuil INVEST configurable par projet (0–100, défaut 70) + critères INVEST individuels obligatoires/optionnels. Stockage scope Collection (`doR-config-{projectId}`). Héritage orga → projet en deux passes. Écriture réservée aux Project Admins ADO.
-- **US-M2 — Enforcement (niveaux 1 + 2)** : bannière warning dans le panneau PO si US non conforme. Bouton "Générer les tests" grisé dans le QA Hub si US sous le seuil ou critère obligatoire manquant. Gate basée sur le score heuristique offline — zéro LLM requis.
+- **US-M1 — Configuration DoR** : seuil INVEST configurable par projet (0–100, défaut 70) \+ critères INVEST individuels obligatoires/optionnels. Stockage scope Collection (`doR-config-{projectId}`). Héritage orga → projet en deux passes. Écriture réservée aux Project Admins ADO.
+- **US-M2 — Enforcement (niveaux 1 \+ 2)** : bannière warning dans le panneau PO si US non conforme. Bouton "Générer les tests" grisé dans le QA Hub si US sous le seuil ou critère obligatoire manquant. Gate basée sur le score heuristique offline — zéro LLM requis.
 - **US-M3 — Dashboard Qualité backlog** : 4e onglet dans le QA Hub. Liste des US du sprint avec score heuristique, statut DoR ✓/✗ et critères défaillants. Recalcul à la volée, aucune donnée stockée.
-- `DorService.checkCompliance()` : fonction pure, testée avec 90 %+ de couverture sur `src/config/`.
+- `DorService.checkCompliance()` : fonction pure, testée avec 90 %\+ de couverture sur `src/config/`.
 
 ---
 
