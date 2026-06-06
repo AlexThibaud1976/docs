@@ -24,7 +24,7 @@ Before you push any code, TestForge calculates a **local quality score** (no ext
 | **Syntax** | 30% | Language-specific structure |
 | **AC Coverage** | 25% | Keywords from acceptance criteria found in code |
 | **POM Pattern** | 20% | Page Object separation detected (N/A for Cucumber) |
-| **Traceability** | 15% | US ID annotation present in comments |
+| **Traceability** | 15% | US ID annotation present in comments (`@us-{id}`) |
 | **Readability** | 10% | Line length, comments, naming conventions |
 
 **Score ≥ 70**: good quality, push with confidence. **Score \< 60**: Regenerate button is highlighted.
@@ -43,3 +43,217 @@ When you select a Cucumber framework:
 <Warning>
   For Cucumber, generate manual tests first. If no Gherkin scenarios are available, TestForge cannot proceed.
 </Warning>
+
+---
+
+## Getting started with your generated code
+
+After generation, TestForge displays a **"How to use this code"** panel with the exact steps for your framework. Here is the full reference for all 8 frameworks.
+
+### Playwright TypeScript \{#playwright-ts}
+
+```bash
+# Install
+npm i -D @playwright/test
+npx playwright install
+```
+
+**Project structure**
+```
+tests/          ← generated test files
+pages/          ← Page Object classes
+playwright.config.ts
+```
+
+```bash
+# Run
+npx playwright test
+```
+
+---
+
+### Playwright Python \{#playwright-python}
+
+```bash
+# Install
+pip install pytest-playwright
+playwright install
+```
+
+**Project structure**
+```
+tests/          ← generated test files
+pages/          ← Page Object classes
+pytest.ini
+```
+
+```bash
+# Run
+pytest
+```
+
+---
+
+### Playwright .NET (C#) \{#playwright-dotnet}
+
+```bash
+# Install
+dotnet add package Microsoft.Playwright
+playwright install
+```
+
+**Project structure**
+```
+Tests/          ← generated test files
+Pages/          ← Page Object classes
+*.csproj
+```
+
+```bash
+# Run
+dotnet test
+```
+
+---
+
+### Selenium Java \{#selenium-java}
+
+Add to your `pom.xml`:
+
+```xml
+<dependencies>
+  <dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-java</artifactId>
+    <version>4.x</version>
+  </dependency>
+  <dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter</artifactId>
+    <version>5.x</version>
+    <scope>test</scope>
+  </dependency>
+  <dependency>
+    <groupId>io.github.bonigarcia</groupId>
+    <artifactId>webdrivermanager</artifactId>
+    <version>5.x</version>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+```
+
+**Project structure**
+```
+src/test/java/
+  tests/        ← generated test files
+  pages/        ← Page Object classes
+pom.xml
+```
+
+```bash
+# Run
+mvn test
+```
+
+---
+
+### Cypress JavaScript \{#cypress-js}
+
+```bash
+# Install
+npm i -D cypress
+```
+
+**Project structure**
+```
+cypress/
+  e2e/          ← generated test files
+  support/      ← commands and fixtures
+cypress.config.js
+```
+
+```bash
+# Run
+npx cypress run
+```
+
+---
+
+### Cucumber JavaScript \{#cucumber-js}
+
+```bash
+# Install
+npm i -D @cucumber/cucumber
+```
+
+**Project structure**
+```
+features/             ← generated .feature files
+step-definitions/     ← generated step definitions
+.cucumberrc.yml
+```
+
+```bash
+# Run
+npx cucumber-js
+```
+
+---
+
+### Cucumber Java \{#cucumber-java}
+
+Add to your `pom.xml`:
+
+```xml
+<dependencies>
+  <dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-java</artifactId>
+    <version>7.x</version>
+    <scope>test</scope>
+  </dependency>
+  <dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-junit</artifactId>
+    <version>7.x</version>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+```
+
+**Project structure**
+```
+src/test/resources/features/    ← generated .feature files
+src/test/java/steps/            ← generated step definitions
+pom.xml
+```
+
+```bash
+# Run
+mvn test
+```
+
+---
+
+### Cucumber Python \{#cucumber-python}
+
+```bash
+# Install
+pip install pytest-bdd
+```
+
+**Project structure**
+```
+features/       ← generated .feature files
+step_defs/      ← generated step definitions
+pytest.ini
+```
+
+```bash
+# Run
+pytest
+```
+
+<Info>
+  The inline **"How to use this code"** accordion in the QA Hub links directly to each section above. Keep this page up to date whenever framework versions are bumped.
+</Info>
