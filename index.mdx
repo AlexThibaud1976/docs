@@ -1,8 +1,52 @@
 ---
-title: "TestForge Documentation"
-description: "AI-powered INVEST scoring, user story improvement, and test generation for Azure DevOps."
+title: "Introduction"
+description: "AI-powered INVEST scoring, user story improvement, and test generation — inside Azure DevOps."
+icon: "sparkles"
 ---
 
-import { redirect } from 'next/navigation'
+# Welcome to TestForge
 
-<meta http-equiv="refresh" content="0; url=/introduction" />
+TestForge is an **Azure DevOps extension** that brings AI-powered quality intelligence into every work item. It covers the full pipeline from backlog quality to production-ready test code — without leaving ADO and without sending your data anywhere outside your tenant.
+
+<CardGroup cols={2}>
+  <Card title="Install in 2 minutes" icon="download" href="/getting-started/installation">
+    Get TestForge running on your ADO organisation. No credit card, no backend setup.
+  </Card>
+  <Card title="Quick start" icon="play" href="/getting-started/quick-start">
+    Score your first user story and generate tests in under 5 minutes.
+  </Card>
+  <Card title="Configure your LLM" icon="key" href="/configuration/llm-providers">
+    Connect your Azure AI Foundry, Azure OpenAI, or compatible endpoint.
+  </Card>
+  <Card title="Security overview" icon="shield" href="/security/data-privacy">
+    Understand the BYOK model and what data never leaves your tenant.
+  </Card>
+</CardGroup>
+
+## What TestForge does
+
+**The work item panel (PO / BA)**
+- Instant heuristic INVEST score on every work item — offline, no API call
+- LLM-powered deep analysis with criterion-level suggestions
+- One-click description and acceptance criteria improvement with writeback
+- Side-by-side diff before anything is saved
+
+**The QA Hub (QA engineers)**
+- Manual test generation with Gherkin (Given/When/Then) per typology
+- Push tests to ADO via the *Tested By* relation — no Test Plans licence required
+- Automated test code generation in 8 frameworks
+- 5-dimension code quality score before pushing to Repos
+- Configurable test count: simple slider (2–32) or advanced per-typology control
+
+## Who is it for?
+
+| Role | Primary benefit |
+|------|----------------|
+| **Product Owner / BA** | Write better user stories faster; see INVEST score on every item |
+| **QA Engineer** | Generate test cases and test code in seconds instead of hours |
+| **Engineering Manager** | Track backlog quality over time; enforce a Definition of Ready |
+| **CISO / Compliance** | All data stays in your tenant — auditable, BYOK, no third-party processing |
+
+<Warning>
+TestForge servers **never receive** your user stories, acceptance criteria, or generated tests. All LLM calls go browser-direct from your ADO tab to the endpoint you configure, under your credentials.
+</Warning>
