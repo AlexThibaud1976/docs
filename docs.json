@@ -8,59 +8,48 @@
     "dark": "#0C447C"
   },
   "favicon": "/favicon.svg",
-  "navigation": {
-    "pages": [
-      {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
-        ]
-      }
-    ],
-    "groups": [
-      {
-        "group": "Getting Started",
-        "icon": "rocket",
-        "pages": [
-          "introduction",
-          "getting-started/installation",
-          "getting-started/quick-start"
-        ]
-      },
-      {
-        "group": "Configuration",
-        "icon": "gear",
-        "pages": [
-          "configuration/llm-providers",
-          "configuration/test-count"
-        ]
-      },
-      {
-        "group": "Features",
-        "icon": "star",
-        "pages": [
-          "features/invest-scoring",
-          "features/manual-tests",
-          "features/automated-tests"
-        ]
-      },
-      {
-        "group": "Security",
-        "icon": "shield",
-        "pages": [
-          "security/data-privacy"
-        ]
-      },
-      {
-        "group": "Changelog",
-        "icon": "clock",
-        "pages": [
-          "changelog"
-        ]
-      }
-    ]
-  },
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "icon": "rocket",
+      "pages": [
+        "introduction",
+        "getting-started/installation",
+        "getting-started/quick-start"
+      ]
+    },
+    {
+      "group": "Configuration",
+      "icon": "gear",
+      "pages": [
+        "configuration/llm-providers",
+        "configuration/test-count"
+      ]
+    },
+    {
+      "group": "Features",
+      "icon": "star",
+      "pages": [
+        "features/invest-scoring",
+        "features/manual-tests",
+        "features/automated-tests"
+      ]
+    },
+    {
+      "group": "Security",
+      "icon": "shield",
+      "pages": [
+        "security/data-privacy"
+      ]
+    },
+    {
+      "group": "Changelog",
+      "icon": "clock",
+      "pages": [
+        "changelog"
+      ]
+    }
+  ],
   "logo": {
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg"
@@ -77,18 +66,6 @@
       "label": "Install free →",
       "href": "https://marketplace.visualstudio.com/items?itemName=AlexThibaud.testforge-ado"
     }
-  },
-  "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
-    ]
   },
   "footer": {
     "socials": {
