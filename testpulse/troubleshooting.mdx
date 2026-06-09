@@ -1,0 +1,98 @@
+---
+title: "Troubleshooting"
+description: "Solutions to the most common TestPulse issues."
+icon: "wrench"
+---
+
+# Troubleshooting
+
+## TestPulse is missing from Test Plans
+
+**Symptom:** The TestPulse tab doesn't appear in the Test Plans menu.
+
+**Solutions:**
+
+1. Clear your browser cache and hard-reload the page (`Ctrl+Shift+R` / `Cmd+Shift+R`)
+2. Check that the extension is installed: go to **Organisation Settings → Extensions** and verify TestPulse is listed and enabled
+3. If recently installed, wait 1–2 minutes and reload
+4. Verify that your project has the **Test Plans** feature enabled in **Project Settings → Boards** (Azure DevOps Services)
+
+---
+
+## The plans list is empty
+
+**Symptom:** The test plan dropdown shows no options.
+
+**Solutions:**
+
+1. Click the **Refresh** button next to the dropdown
+2. Confirm that test plans exist in the current project (check Test Plans in the native ADO UI)
+3. Verify that your account has at least **Basic** access level (Stakeholder access cannot see Test Plans)
+
+---
+
+## Traceability shows “—” for all test cases
+
+**Symptom:** The traceability matrix shows dashes instead of User Stories and Epics.
+
+**Solution:** TestPulse builds the traceability hierarchy from ADO work item links. To see data:
+
+1. In ADO Test Plans, open a Test Suite
+2. Link your Test Cases to User Stories (using the **Links** tab on each work item)
+3. Ensure the User Stories are linked to Epics
+4. Regenerate the report
+
+---
+
+## Autocomplete doesn't work for Tester / Approver
+
+**Symptom:** Typing in the Tester or Approver fields shows no suggestions.
+
+**Solutions:**
+
+1. Type at least **2 characters** before suggestions appear
+2. Check your network connection — autocomplete requires a live ADO API call
+3. On some restricted on-premise configurations, the `vso.identity` scope may be limited. If autocomplete never works, type the full name manually — TestPulse will accept free text.
+
+---
+
+## Error 401 or CORS error in the browser console
+
+**Symptom:** Generation fails with a 401 error or a CORS-related message.
+
+**Cause:** TestPulse must be used **from within Azure DevOps**. It cannot be accessed as a standalone URL.
+
+**Solution:** Open TestPulse via **Test Plans → TestPulse** inside your ADO project. Never open the hub URL directly in a new tab.
+
+---
+
+## Report generation is very slow
+
+**Symptom:** The progress bar stays at a low percentage for a long time.
+
+**Solutions:**
+
+1. If **Attachments** are enabled in Settings, disabling them will significantly speed up generation — attachment fetching is the most time-consuming operation
+2. If your test plan has more than 500 test points, try reducing the **Max runs** setting in Settings (default: 200)
+3. Check your network connection — TestPulse makes several parallel API calls to ADO
+
+---
+
+## The PDF section order panel is grayed out
+
+**Symptom:** The "PDF section order" drag-and-drop panel is visible but not interactive.
+
+**Cause:** The PDF export button has been disabled in **Settings → Visible export buttons**.
+
+**Solution:** Re-enable the PDF format in Settings → Visible export buttons, or ignore the panel if you only use HTML/Word/Excel exports.
+
+---
+
+## Something else?
+
+If your issue isn't listed here, [open an issue on GitHub](https://github.com/AlexThibaud1976/TFS_Reporter_Addon/issues) with:
+
+- Your ADO version (Services or Server \+ version number)
+- Browser and version
+- What you were doing when the problem occurred
+- Any error messages from the browser console (`F12 → Console`)

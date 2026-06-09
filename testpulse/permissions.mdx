@@ -1,0 +1,45 @@
+---
+title: "Permissions"
+description: "ADO permission scopes required by TestPulse and what the extension does with them."
+icon: "shield"
+---
+
+# Permissions
+
+TestPulse requests the minimum set of Azure DevOps permission scopes required to read your test data and save preferences.
+
+## Required scopes
+
+| Scope | Purpose |
+| --- | --- |
+| `vso.test` | Read Test Plans, Suites, Test Cases, Test Results, Test Configurations |
+| `vso.work` | Read Work Items (User Stories, Epics, Bugs) for traceability |
+| `vso.identity` | Resolve user display names for autocomplete (Tester, Approver fields) |
+| `vso.extension.data` | Save and load user preferences and report history via ADO Extension Data |
+
+## What TestPulse does NOT do
+
+- Does **not** write test results back to ADO
+- Does **not** create or modify work items
+- Does **not** send any data to external servers
+- Does **not** store credentials — authentication is handled entirely by Azure DevOps
+
+## No server, no telemetry
+
+TestPulse runs entirely in the browser as an ADO hub extension. All API calls go directly from your browser to your Azure DevOps instance. No proxies, no third-party services, no analytics.
+
+<Note>
+  User preferences (settings, report history) are stored in Azure DevOps Extension Data under your user account. This data is scoped to your ADO identity and is not accessible to other users.
+</Note>
+
+## Organisation admin requirements
+
+Installing extensions requires **organisation administrator** permissions in Azure DevOps. Once installed, TestPulse is available to all members of the organisation who have access to Test Plans.
+
+## On-premise considerations
+
+For Azure DevOps Server, ensure that:
+
+1. The extension policy in **Collection Settings → Extensions** allows installing extensions
+2. The server can reach the Visual Studio Marketplace (for Marketplace installs) or that the `.vsix` is uploaded manually
+3. The `vso.identity` scope is available — on some restricted configurations, user autocomplete may not work (TestPulse degrades gracefully in this case)
