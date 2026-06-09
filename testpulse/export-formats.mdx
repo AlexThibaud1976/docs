@@ -1,0 +1,90 @@
+---
+title: "Export Formats"
+description: "PDF, HTML, Word, Excel — when to use each format and what it contains."
+icon: "file-export"
+---
+
+# Export Formats
+
+TestPulse generates four export formats from the same data. Each is optimised for a different use case.
+
+## Choosing the right format
+
+| Format | Best for | Key characteristics |
+| --- | --- | --- |
+| **PDF** | Formal delivery, audit trail | Paginated, printable, signature page, offline-ready |
+| **HTML** | Sharing, dashboards, wikis | Interactive, self-contained, Chart.js charts, no server needed |
+| **Word (.docx)** | Editable documents, client templates | Editable after export, compatible with Word and Google Docs |
+| **Excel (.xlsx)** | Data analysis, pivot tables | 4 sheets: KPIs, Results, Traceability, Bugs |
+
+---
+
+## PDF
+
+The PDF export produces a paginated, print-ready document.
+
+**What it includes:**
+
+- Cover page with logo (if configured), project info, date
+- Executive summary with automated verdict
+- KPI metrics page with optional Chart.js charts (rendered locally — works offline)
+- Results table — with optional Test Configuration column
+- Traceability section — 3-column view: Requirement | Tests | Defects
+- Bugs table
+- Flaky tests section (if detected)
+- Optional attachments (PNG/JPEG embedded inline)
+- Optional signature page with configurable boxes
+
+**Configurable:** section order (drag-and-drop), visible sections, theme colour, logo, charts-in-PDF toggle. See [Settings → Export Sections](/testpulse/settings-exports).
+
+---
+
+## HTML
+
+The HTML export produces a **standalone `.html` file** that opens in any browser without a server.
+
+**What it includes:**
+
+- All PDF sections plus interactive Chart.js charts
+- Clickable ADO links for work items, bugs, and test cases
+- Responsive layout (readable on mobile)
+- Self-contained — no external dependencies after export
+
+**Ideal for:** embedding in ADO wikis, sharing via email, storing in SharePoint.
+
+---
+
+## Word (.docx)
+
+The Word export produces an editable `.docx` file.
+
+**What it includes:**
+
+- Cover page, metrics table, results table, traceability table, bugs table
+- Optional signature page
+- Configuration column if multiple test configurations are detected
+
+**Note:** Charts are not included in Word exports (use PDF or HTML for charts).
+
+---
+
+## Excel (.xlsx)
+
+The Excel export produces a workbook with **4 sheets**:
+
+| Sheet | Contents |
+| --- | --- |
+| **KPIs** | All project metadata \+ metric values |
+| **Results** | All test results with outcome, suite, tester, date, duration |
+| **Traceability** | Test case linked to US, Epic, bugs |
+| **Bugs** | All linked bugs with state, severity, priority, assignee |
+
+**Ideal for:** feeding data into dashboards, pivot analysis, or importing into other tools.
+
+---
+
+## Controlling which buttons are visible
+
+You can choose which export buttons appear in the toolbar from **Settings → Visible export buttons**. Disable formats you never use to keep the interface clean.
+
+A PowerPoint slot is reserved and will be available in a future release.

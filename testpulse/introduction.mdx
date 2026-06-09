@@ -1,0 +1,64 @@
+---
+title: "Introduction"
+description: "What TestPulse is, what it does, and when to use it."
+icon: "sparkles"
+---
+
+# What is TestPulse?
+
+TestPulse is an **Azure DevOps extension** that lives directly inside Test Plans. It turns your test execution data into professional reports — PDF, HTML, Word, and Excel — without any external tools, backend servers, or copy-pasting.
+
+## What it does
+
+- **Fetches** test results, suites, work items and attachments via the ADO REST API
+- **Computes** KPIs: pass rate, execution rate, flaky detection, traceability coverage
+- **Exports** to PDF, HTML, Word (.docx), and Excel (.xlsx) with a single click
+- **No data leaves** your Azure DevOps instance — everything runs in the browser
+
+## When to use TestPulse
+
+| Use case | Recommended format |
+| --- | --- |
+| Formal QA delivery to a client | PDF with signature page |
+| Sprint review dashboard | HTML (interactive, shareable) |
+| Audit trail (ISO, SOC2) | PDF \+ Excel |
+| Stakeholder executive summary | PDF with charts |
+| Raw data analysis | Excel (4 sheets: KPIs, Results, Traceability, Bugs) |
+
+## What it is NOT
+
+- **Not a test runner** — TestPulse reads existing results, it doesn't execute tests
+- **Not a cloud service** — no data leaves your Azure DevOps instance
+- **Not a replacement for ADO Test Plans** — it complements it with reporting
+
+## Supported targets
+
+| Target | Status |
+| --- | --- |
+| Azure DevOps Services (cloud) | ✅ Fully supported |
+| Azure DevOps Server 2022.1 (on-premise) | ✅ Fully supported |
+| Azure DevOps Server 2019/2020/2022 | ✅ Supported |
+
+## Key capabilities at a glance
+
+<CardGroup cols={2}>
+  <Card title="PDF & HTML Reports" icon="file-pdf">
+    Professional paginated PDF, standalone interactive HTML — both generated client-side with no server.
+  </Card>
+
+  <Card title="Full Traceability" icon="network-wired">
+    Epic → User Story → Test Case → Bug hierarchy, automatically built from your ADO work item links.
+  </Card>
+
+  <Card title="KPIs & Metrics" icon="chart-bar">
+    Pass rate, execution rate, flaky test detection, configuration coverage — computed automatically.
+  </Card>
+
+  <Card title="No Backend Required" icon="cloud">
+    Runs entirely in your browser. Your data never leaves Azure DevOps.
+  </Card>
+</CardGroup>
+
+<Note>
+  TestPulse is published by **Kisskool** on the Visual Studio Marketplace. [View on Marketplace →](https://marketplace.visualstudio.com/items?itemName=Kisskool.testpulse)
+</Note>

@@ -1,0 +1,74 @@
+---
+title: "Installation"
+description: "Install TestPulse from the Marketplace or manually via .vsix for on-premise environments."
+icon: "download"
+---
+
+# Installation
+
+TestPulse is available free on the Visual Studio Marketplace. Installation takes under 2 minutes.
+
+## From the Marketplace (recommended)
+
+<Steps>
+  <Step title="Open the Marketplace listing">
+    Go to [TestPulse on the Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Kisskool.testpulse) and click **Get it free**.
+  </Step>
+  <Step title="Select your organisation">
+    Sign in with your Azure DevOps account and select the organisation where you want to install TestPulse.
+  </Step>
+  <Step title="Click Install">
+    Confirm the installation. Azure DevOps will ask for the required permission scopes — click **Accept**.
+  </Step>
+  <Step title="Open your project">
+    Navigate to any project in your organisation, open **Test Plans** in the left sidebar, and click the **TestPulse** tab.
+  </Step>
+</Steps>
+
+<Note>
+  Organisation admin permissions are required to install extensions. If you don't have them, ask your ADO administrator to install TestPulse for the organisation.
+</Note>
+
+---
+
+## Manual installation (on-premise / air-gapped)
+
+For Azure DevOps Server environments without internet access:
+
+<Steps>
+  <Step title="Download the .vsix">
+    Go to the [GitHub Releases page](https://github.com/AlexThibaud1976/TFS_Reporter_Addon/releases) and download the latest `.vsix` file.
+  </Step>
+  <Step title="Open Collection Settings">
+    In your Azure DevOps Server, go to **Collection Settings → Extensions → Manage Extensions**.
+  </Step>
+  <Step title="Upload the extension">
+    Click **Upload extension** and select the `.vsix` file you downloaded.
+  </Step>
+  <Step title="Install for the collection">
+    Once uploaded, click **Install** next to TestPulse to make it available in all projects of the collection.
+  </Step>
+</Steps>
+
+---
+
+## Prerequisites
+
+| Requirement | Details |
+| --- | --- |
+| Azure DevOps version | Services (cloud) or Server ≥ 2019 |
+| Browser | Chrome, Edge, or Firefox with JavaScript enabled |
+| Permissions | Member of at least one project with a Test Plan |
+| ADO permissions | `vso.test` scope (granted automatically on install) |
+
+---
+
+## After installation
+
+TestPulse appears under **Test Plans → TestPulse** in the left navigation of every project in your organisation.
+
+If you don't see it after installation:
+
+- Clear your browser cache and reload
+- Check that the extension is enabled in **Organisation Settings → Extensions**
+- Verify that your project has the Test Plans feature enabled
