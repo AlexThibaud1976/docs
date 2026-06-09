@@ -6,6 +6,16 @@ icon: "sparkles"
 
 # Changelog
 
+## v1.17.0 — 2026-06-09
+
+**8 frameworks opérationnels**
+
+- **Fixed — Cypress JS, Playwright Python, Playwright .NET** : ces 3 combos affichés dans le sélecteur levaient une erreur « Combo non supporté en v1 » à la génération (modules de prompt manquants). Les 3 modules sont maintenant opérationnels avec UNTRUSTED\_DATA\_DISCLAIMER, POM idiomatique et structure de fichiers conforme.
+- **Added — Cucumber Java** : nouveau combo dans le sélecteur — step definitions `io.cucumber.java`, extensions `.steps.java` / `.feature`.
+- **Added — Cucumber Python** : nouveau combo — runner `pytest-bdd`, extensions `_steps.py` / `.feature`.
+
+---
+
 ## v1.16.0 — 2026-06-06
 
 **Traçabilité ID US réel \+ Guide Next Steps**
