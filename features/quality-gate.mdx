@@ -1,0 +1,38 @@
+---
+title: "Quality Gate & Definition of Ready"
+description: "Enforce a configurable Definition of Ready on every user story before tests can be generated."
+icon: "shield-check"
+---
+
+# Quality Gate & Definition of Ready
+
+TestForge can enforce a **Definition of Ready (DoR)** on every user story, so tests are only generated once a story meets your team's quality bar.
+
+## Configure the Definition of Ready
+
+Project Admins configure the DoR from the **Config** tab of the QA Hub:
+
+- **Score threshold** — the minimum INVEST heuristic score a story must reach (0–100, default **70**).
+- **Required criteria** — mark any of the six INVEST criteria as *required* or *optional*.
+- **Enabled toggle** — switch the gate off without losing your threshold and criteria settings.
+
+The configuration is stored at **project scope** and inherits from an organisation-level default when no project configuration exists. Non-admins see it read-only.
+
+## How the gate behaves
+
+The gate runs on the **offline heuristic score** — no LLM call required.
+
+- **Level 1 — warning banner.** When a story is below the threshold, a non-blocking banner appears in the Product Owner panel, highlighting what is missing.
+- **Level 2 — generation blocked.** When a story is non-compliant, the **Generate** button is disabled on **both** the manual and the automated test tabs. A tooltip shows the current score and the required threshold, and links to the Product Owner panel so the story can be improved first.
+
+<Info>
+  The gate covers every generation surface. Switching from the manual tab to the automated tab does not bypass it.
+</Info>
+
+## Required criteria
+
+When an INVEST analysis is available, a **required** criterion that is *weak* or *missing* blocks generation even if the overall score is above the threshold. When no analysis has been run, the gate falls back to the score-only check.
+
+## Language
+
+The gate and its messages follow the in-product UI language (English or French). The heuristic score itself is computed the same way regardless of the story's language.

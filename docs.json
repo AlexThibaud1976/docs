@@ -32,6 +32,7 @@
         "icon": "star",
         "pages": [
           "features/invest-scoring",
+          "features/quality-gate",
           "features/manual-tests",
           "features/automated-tests"
         ]
