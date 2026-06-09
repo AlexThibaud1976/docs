@@ -6,43 +6,49 @@ icon: "sparkles"
 
 # Changelog
 
-## v1.17.0 — 2026-06-09
+## v1.18.0 — 2026-06-09
 
-**8 frameworks opérationnels**
+**8 frameworks live + exhaustive Definition of Ready gate**
 
-- **Fixed — Cypress JS, Playwright Python, Playwright .NET** : ces 3 combos affichés dans le sélecteur levaient une erreur « Combo non supporté en v1 » à la génération (modules de prompt manquants). Les 3 modules sont maintenant opérationnels avec UNTRUSTED\_DATA\_DISCLAIMER, POM idiomatique et structure de fichiers conforme.
-- **Added — Cucumber Java** : nouveau combo dans le sélecteur — step definitions `io.cucumber.java`, extensions `.steps.java` / `.feature`.
-- **Added — Cucumber Python** : nouveau combo — runner `pytest-bdd`, extensions `_steps.py` / `.feature`.
+Automated test generation
+- **All 8 frameworks now generate end-to-end.** Cypress (JavaScript), Playwright (Python) and Playwright (.NET / C#) appeared in the framework selector but raised a "framework not supported" error at generation time because their prompt modules were missing — the three are now fully operational, with idiomatic Page Object structure and conformant file layout.
+- **Added — Cucumber (Java):** step definitions for `io.cucumber.java`, with `.steps.java` / `.feature` files.
+- **Added — Cucumber (Python):** `pytest-bdd` runner, with `_steps.py` / `.feature` files.
+
+Quality Gate
+- **The gate now covers every generation surface.** When a User Story does not meet the Definition of Ready, both the manual *and* the automated test-generation buttons are disabled — the automated tab can no longer be used to bypass the gate.
+- **Clearer feedback:** a disabled generation button now shows the current score and the configured threshold (e.g. "score 52, threshold 70") and links straight to the Product Owner panel so the story can be improved first.
+- **Required INVEST criteria are now enforced:** a mandatory criterion that is weak or missing blocks generation when an INVEST analysis is available; the offline, score-only check is unchanged.
+- **The gate can be switched off without losing its configuration**, via a new toggle in the Definition of Ready settings.
 
 ---
 
 ## v1.16.0 — 2026-06-06
 
-**Traçabilité ID US réel \+ Guide Next Steps**
+**Real US ID traceability + Next Steps guide**
 
-- **Annotations de traçabilité** : l'ID réel de la US (`@us-1234`) remplace le placeholder `@us-0`. Le `workItemId` est désormais transmis jusqu'au prompt builder.
-- **Score qualité — dimension traceability** : `@us-0` et `@us-unknown` ne comptent plus comme annotation valide (seuls les IDs \> 0 sont acceptés).
-- **Accordéon "How to use this code"** : affiché inline après chaque génération — commande d'installation, structure de répertoires et commande d'exécution spécifiques au framework sélectionné.
-- **Lien "Full setup guide →"** : lien direct vers la section du framework dans [la documentation](https://docs.testforge.info/features/automated-tests).
+- **Traceability annotations**: generated tests now reference the real work item ID (`@us-1234`) instead of a placeholder.
+- **Quality score — traceability dimension**: placeholder and unknown IDs no longer count as a valid annotation; only real work item IDs are accepted.
+- **"How to use this code" accordion**: shown inline after each generation — install command, directory structure and run command for the selected framework.
+- **"Full setup guide →" link**: a direct link to the framework section in [the documentation](https://docs.testforge.info/features/automated-tests).
 
 ---
 
 ## v1.15.1 — 2026-06-06
 
-**Hotfix — chargement hub (GraphRestClient)**
+**Hotfix — QA Hub loading**
 
-- `dor-admin-check.ts` : suppression de `GraphRestClient` et du scope `vso.graph` non déclaré. `isProjectAdmin()` utilise désormais uniquement `SDK.getPageContext()` (synchrone, zéro réseau). Corrige le spinner infini au chargement du hub introduit par la Phase 13.
+- Fixed an infinite loading spinner when opening the QA Hub. Admin-role detection now runs fully offline, with no network call at load time.
 
 ---
 
 ## v1.15.0 — 2026-06-06
 
-**Quality Gate & Definition of Ready (EPIC M)**
+**Quality Gate & Definition of Ready**
 
-- **US-M1 — Configuration DoR** : seuil INVEST configurable par projet (0–100, défaut 70) \+ critères INVEST individuels obligatoires/optionnels. Stockage scope Collection (`doR-config-{projectId}`). Héritage orga → projet en deux passes. Écriture réservée aux Project Admins ADO.
-- **US-M2 — Enforcement (niveaux 1 \+ 2)** : bannière warning dans le panneau PO si US non conforme. Bouton "Générer les tests" grisé dans le QA Hub si US sous le seuil ou critère obligatoire manquant. Gate basée sur le score heuristique offline — zéro LLM requis.
-- **US-M3 — Dashboard Qualité backlog** : 4e onglet dans le QA Hub. Liste des US du sprint avec score heuristique, statut DoR ✓/✗ et critères défaillants. Recalcul à la volée, aucune donnée stockée.
-- `DorService.checkCompliance()` : fonction pure, testée avec 90 %\+ de couverture sur `src/config/`.
+- **Configurable Definition of Ready**: a per-project INVEST threshold (0–100, default 70) plus individual INVEST criteria marked required or optional, with organisation → project inheritance. Editing is restricted to Azure DevOps Project Admins.
+- **Enforcement (levels 1 & 2)**: a warning banner appears in the Product Owner panel when a story is non-compliant, and the "Generate tests" button is disabled in the QA Hub when the story is below threshold or missing a required criterion. The gate runs on the offline heuristic score — no LLM required.
+- **Backlog Quality dashboard**: a new tab in the QA Hub listing the sprint's stories with their heuristic score, Definition-of-Ready status and failing criteria. Recomputed on the fly, with no stored data.
 
 ---
 
@@ -115,5 +121,5 @@ icon: "sparkles"
 ---
 
 <Info>
-  For the full commit history, see the [GitHub repository](https://github.com/AlexThibaud1976/testforge-ado).
+  For the full commit history, see the [GitHub repository](https://github.com/AlexThibaud1976/ADO_Forge).
 </Info>
