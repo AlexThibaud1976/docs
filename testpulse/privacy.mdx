@@ -1,0 +1,137 @@
+---
+title: "Privacy Policy"
+description: "How TestPulse handles your data. Opt-in telemetry only, no personal data, GDPR compliant."
+icon: "shield"
+---
+
+# Privacy Policy
+
+**Product:** TestPulse — Azure DevOps Test Report Extension **Publisher:** Kisskool **Last updated:** 9 June 2026
+
+---
+
+## 1. Who we are
+
+TestPulse is an Azure DevOps Marketplace extension published by **Kisskool**, a solo-developer company based in France. TestPulse generates professional test reports (PDF, HTML, Word, Excel) directly from Azure DevOps Test Plans.
+
+Contact: [alexandre@kisskool.fr](mailto:alexandre@kisskool.fr)
+
+---
+
+## 2. The short version
+
+TestPulse runs **entirely in your browser**, inside your Azure DevOps instance. Your test data, project names, user names and results **never leave your Azure DevOps environment**.
+
+The only optional outbound data is anonymous usage telemetry — and it is **disabled by default**.
+
+---
+
+## 3. Data we do NOT collect
+
+The following data never leaves your browser under any circumstance:
+
+- Test plan names, suite names, test case names
+- Test results and outcomes
+- Report content (title, project reference, environment, notes, annotations)
+- User names, tester names, approver names
+- Azure DevOps organisation or project identifiers
+- Azure DevOps instance URLs
+- Access tokens or credentials
+- IP addresses
+- Any personally identifiable information (PII)
+
+TestPulse does not have a backend server. It cannot receive, store or process any of the above — there is no infrastructure to send it to.
+
+---
+
+## 4. Optional anonymous telemetry
+
+If you explicitly enable usage analytics in **Settings → Usage analytics**, TestPulse may send the following anonymous, non-personal events:
+
+| Data point | Example value | Purpose |
+| --- | --- | --- |
+| Extension version | `2.7.7` | Understand adoption of releases |
+| Action type | `report_generated` | Know which features are used |
+| Generation duration | `4320` (ms) | Detect performance regressions |
+| Suite count | `5` | Understand report complexity |
+| Test case count | `42` | Understand report complexity |
+| Export format | `pdf` | Prioritise format improvements |
+| Error HTTP code | `403` | Detect API compatibility issues |
+| Cloud vs on-premise | `false` | Ensure on-premise compatibility |
+| UI language | `fr` | Prioritise translation quality |
+| Action success | `true` | Measure reliability |
+
+**This feature is opt-in and disabled by default.** You can enable or disable it at any time in Settings. Disabling it takes effect immediately — no further events are sent.
+
+### On-premise and air-gapped environments
+
+If TestPulse cannot reach the telemetry endpoint (timeout after 3 seconds), the event is silently discarded. No error is shown, no retry is attempted, and your extension continues to work normally.
+
+### Telemetry processor
+
+When enabled, anonymous events are processed by [**Plausible.io**](https://plausible.io), an EU-hosted, GDPR-compliant analytics service that uses no cookies and collects no personal data. Plausible's own privacy policy is available at [plausible.io/privacy](https://plausible.io/privacy).
+
+---
+
+## 5. Data stored locally in Azure DevOps
+
+TestPulse stores the following data **inside your Azure DevOps instance**, using the ADO Extension Data Service:
+
+- Your user preferences (settings, language, colours, thresholds)
+- Your generated report history (report snapshots and metadata)
+- Your saved templates and views
+
+This data is scoped to your ADO user account (or your ADO project for shared reports). It is stored exclusively within your Azure DevOps infrastructure, governed by your organisation's Microsoft agreement. Kisskool has no access to this data.
+
+---
+
+## 6. Azure DevOps permission scopes
+
+TestPulse requests the following ADO permission scopes:
+
+| Scope | Purpose |
+| --- | --- |
+| `vso.test` | Read test plans, suites, cases and results |
+| `vso.work` | Read work items (User Stories, Epics, Bugs) for traceability |
+| `vso.identity` | Resolve user display names for autocomplete fields |
+| `vso.extension.data` | Save and load preferences and report history |
+
+TestPulse does **not** request write scopes (`vso.work_write`, `vso.test_write`) in the current version. Read-only access only.
+
+---
+
+## 7. Third-party services
+
+TestPulse does not integrate with any third-party service by default. Optional integrations (Teams/Slack webhooks, configured by the user) send data directly from your browser to the endpoint you configure — Kisskool never receives or intermediates this data.
+
+---
+
+## 8. GDPR compliance
+
+TestPulse is designed to comply with the General Data Protection Regulation (GDPR):
+
+- **No personal data collected** without explicit consent
+- **Opt-in telemetry** — disabled by default, revocable at any time
+- **No data processing agreement required** for the base product (no personal data is processed by Kisskool)
+- **EU-based telemetry processor** (Plausible.io) when telemetry is enabled
+- **Data minimisation** — only the minimum necessary anonymous metrics are collected
+
+If your organisation requires a Data Processing Agreement (DPA) for the optional telemetry, please contact [alexandre@kisskool.fr](mailto:alexandre@kisskool.fr).
+
+---
+
+## 9. Your rights
+
+Since Kisskool does not process personal data in the base product, standard GDPR data subject rights (access, rectification, erasure, portability) apply primarily to your Azure DevOps instance data, which is managed by your organisation's ADO administrator.
+
+For any privacy question or concern: [alexandre@kisskool.fr](mailto:alexandre@kisskool.fr)
+
+---
+
+## 10. Changes to this policy
+
+If this policy changes materially (e.g. new data collection), we will update the "Last updated" date above and announce the change in the TestPulse changelog. We will never introduce personal data collection without updating this policy and requiring fresh consent.
+
+---
+
+_TestPulse is built with privacy by design. If something in this policy is unclear, please reach out — we would rather explain than leave any doubt._

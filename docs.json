@@ -49,6 +49,13 @@
         "pages": [
           "changelog"
         ]
+      },
+      {
+        "group": "TestPulse",
+        "icon": "pulse",
+        "pages": [
+          "testpulse/privacy"
+        ]
       }
     ]
   },
