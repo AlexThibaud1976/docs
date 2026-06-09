@@ -49,39 +49,6 @@
         "pages": [
           "changelog"
         ]
-      },
-      {
-        "group": "TestPulse — Getting Started",
-        "icon": "rocket",
-        "pages": [
-          "testpulse/introduction",
-          "testpulse/installation",
-          "testpulse/first-report"
-        ]
-      },
-      {
-        "group": "TestPulse — User Guide",
-        "icon": "book-open",
-        "pages": [
-          "testpulse/export-formats",
-          "testpulse/report-history"
-        ]
-      },
-      {
-        "group": "TestPulse — Settings",
-        "icon": "gear",
-        "pages": [
-          "testpulse/settings-appearance"
-        ]
-      },
-      {
-        "group": "TestPulse — Reference",
-        "icon": "list",
-        "pages": [
-          "testpulse/permissions",
-          "testpulse/troubleshooting",
-          "testpulse/changelog"
-        ]
       }
     ]
   },
