@@ -12,18 +12,20 @@ TestForge can enforce a **Definition of Ready (DoR)** on every user story, so te
 
 Project Admins configure the DoR from the **Config** tab of the QA Hub:
 
-- **Score threshold** — the minimum INVEST heuristic score a story must reach (0–100, default **70**).
-- **Required criteria** — mark any of the six INVEST criteria as *required* or *optional*.
+- **Score threshold** — the minimum INVEST LLM score a story must reach (0–100, default **70**).
+- **Required criteria** — mark any of the six INVEST criteria as _required_ or _optional_.
 - **Enabled toggle** — switch the gate off without losing your threshold and criteria settings.
 
 The configuration is stored at **project scope** and inherits from an organisation-level default when no project configuration exists. Non-admins see it read-only.
 
 ## How the gate behaves
 
-The gate runs on the **offline heuristic score** — no LLM call required.
+The gate uses the **INVEST LLM score** — run an INVEST analysis first in the Product Owner panel.
 
-- **Level 1 — warning banner.** When a story is below the threshold, a non-blocking banner appears in the Product Owner panel, highlighting what is missing.
+- **Level 1 — warning banner.** After an INVEST analysis, when a story is below the threshold, a non-blocking banner appears in the Product Owner panel.
 - **Level 2 — generation blocked.** When a story is non-compliant, the **Generate** button is disabled on **both** the manual and the automated test tabs. A tooltip shows the current score and the required threshold, and links to the Product Owner panel so the story can be improved first.
+
+Without a prior INVEST analysis, generation remains available — there is no automatic blocking.
 
 <Info>
   The gate covers every generation surface. Switching from the manual tab to the automated tab does not bypass it.
@@ -31,8 +33,8 @@ The gate runs on the **offline heuristic score** — no LLM call required.
 
 ## Required criteria
 
-When an INVEST analysis is available, a **required** criterion that is *weak* or *missing* blocks generation even if the overall score is above the threshold. When no analysis has been run, the gate falls back to the score-only check.
+When an INVEST analysis is available, a **required** criterion that is _weak_ or _missing_ blocks generation even if the overall score is above the threshold.
 
 ## Language
 
-The gate and its messages follow the in-product UI language (English or French). The heuristic score itself is computed the same way regardless of the story's language.
+The gate and its messages follow the in-product UI language (English or French).

@@ -6,17 +6,40 @@ icon: "sparkles"
 
 # Changelog
 
+## v1.19.0 — 2026-06-13
+
+**Unified on-demand INVEST score \+ hub icon**
+
+Work item panel (PO / BA)
+
+- **Unified INVEST score (0–100)**: the score is now derived deterministically from the 6 LLM-evaluated criteria — the same source as the I/N/V/E/S/T grid. No more contradictory dual grid.
+- **On demand, never automatic**: the score only appears after clicking "Analyse (INVEST)". No LLM call fires on panel open.
+- **Before → after score**: after "Rewrite in ADO", the panel re-reads the server fields (GET REST — not the form cache, which caused a frozen score) and resets the analysis. Click "Analyse (INVEST)" again to compute the after score and compare improvement.
+- **Actionable failure message**: when no LLM is configured or the endpoint is unreachable, a descriptive message with a link to the Config tab is shown — no phantom score is displayed.
+
+Hub
+
+- **Hub navigation icon**: the TestForge icon now appears in the ADO vertical navigation bar (`iconAsset` added to `testforge-hub`).
+
+Definition of Ready
+
+- The DoR gate now uses the real INVEST LLM score and criterion statuses. Without a prior analysis, generation remains available — no automatic blocking without a score.
+
+---
+
 ## v1.18.0 — 2026-06-09
 
-**8 frameworks live + exhaustive Definition of Ready gate**
+**8 frameworks live \+ exhaustive Definition of Ready gate**
 
 Automated test generation
+
 - **All 8 frameworks now generate end-to-end.** Cypress (JavaScript), Playwright (Python) and Playwright (.NET / C#) appeared in the framework selector but raised a "framework not supported" error at generation time because their prompt modules were missing — the three are now fully operational, with idiomatic Page Object structure and conformant file layout.
 - **Added — Cucumber (Java):** step definitions for `io.cucumber.java`, with `.steps.java` / `.feature` files.
 - **Added — Cucumber (Python):** `pytest-bdd` runner, with `_steps.py` / `.feature` files.
 
 Quality Gate
-- **The gate now covers every generation surface.** When a User Story does not meet the Definition of Ready, both the manual *and* the automated test-generation buttons are disabled — the automated tab can no longer be used to bypass the gate.
+
+- **The gate now covers every generation surface.** When a User Story does not meet the Definition of Ready, both the manual _and_ the automated test-generation buttons are disabled — the automated tab can no longer be used to bypass the gate.
 - **Clearer feedback:** a disabled generation button now shows the current score and the configured threshold (e.g. "score 52, threshold 70") and links straight to the Product Owner panel so the story can be improved first.
 - **Required INVEST criteria are now enforced:** a mandatory criterion that is weak or missing blocks generation when an INVEST analysis is available; the offline, score-only check is unchanged.
 - **The gate can be switched off without losing its configuration**, via a new toggle in the Definition of Ready settings.
@@ -25,7 +48,7 @@ Quality Gate
 
 ## v1.16.0 — 2026-06-06
 
-**Real US ID traceability + Next Steps guide**
+**Real US ID traceability \+ Next Steps guide**
 
 - **Traceability annotations**: generated tests now reference the real work item ID (`@us-1234`) instead of a placeholder.
 - **Quality score — traceability dimension**: placeholder and unknown IDs no longer count as a valid annotation; only real work item IDs are accepted.
