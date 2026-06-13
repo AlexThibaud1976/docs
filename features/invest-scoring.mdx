@@ -17,17 +17,33 @@ icon: "chart-bar"
 | **S** | Small | Does it fit within one sprint? |
 | **T** | Testable | Are the acceptance criteria concrete and verifiable? |
 
-## Two scoring modes
+## How scoring works
 
-### Heuristic score (offline, instant)
+### On-demand INVEST score
 
-Calculated **locally, without any LLM call**. Uses structural signals: persona format (`As a...`), goal (`I want...`), purpose (`so that...` or `to...`), AC presence and format, description length and clarity.
+Click **Analyse (INVEST)** for a full LLM-powered analysis. Each criterion receives one of three statuses:
 
-The heuristic score is always calculated on the **original user story** — it does not change after an LLM improvement is written back to ADO.
+| Status | Score contribution |
+| --- | --- |
+| ✅ **ok** | 100 |
+| ⚠️ **weak** | 50 |
+| ❌ **missing** | 0 |
 
-### LLM analysis (deep)
+The INVEST score (0–100) is derived deterministically from the six criteria: average of the six values, rounded. The number and the I/N/V/E/S/T grid always agree — they share the same source.
 
-Click **Analyse (INVEST)** for a full LLM-powered analysis. Each criterion receives a status, justification, and inline suggestions. Click any criterion cell to expand its suggestions.
+If the score is below 40, an alert prompts you to improve the story before generating tests.
+
+No LLM call fires on panel open — the score only appears after you explicitly click **Analyse (INVEST)**.
+
+Each criterion also shows a justification and inline suggestions. Click any criterion cell to expand its suggestions.
+
+### Before → after score
+
+After clicking **Rewrite in ADO**, the panel re-reads the story fields from the ADO server (not the form cache) and resets the analysis. Click **Analyse (INVEST)** again to compute the **after score** on the improved version.
+
+### When the LLM is unavailable
+
+If your provider is not configured or unreachable, a descriptive message with a link to the Config tab is shown — no phantom score is displayed.
 
 ## Score levels
 
