@@ -6,6 +6,28 @@ icon: "sparkles"
 
 # Changelog
 
+## v1.23.0 — 2026-06-18
+
+**Quality Cockpit (EPIC P)**
+
+- New **Quality** tab as the hub entry point: backlog stories grouped by Definition-of-Ready status, with area-path and iteration selectors.
+- **On-demand and batch INVEST scoring**: score a single story, or run "Analyze all" across an iteration — token estimate shown upfront, a hard cap with confirmation, non-blocking failures, and bounded retry on rate limits.
+- **Persisted scores**: results are stored in your own Azure DevOps tenant (never the story content — scores and analysis metadata only) and flagged as stale when the story changes, with one-click re-score.
+- **Iteration average and trend**: the average score of scored stories, plus a forward-only trend sparkline once at least two iterations are captured.
+- **Product Owner panel detail**: the work item panel shows the persisted score read-only, with an expandable INVEST breakdown (status, rationale and suggestions per criterion).
+
+---
+
+## v1.22.0 — 2026-06-17
+
+**Universal Foundry model compatibility (EPIC Q)**
+
+- **Any OpenAI-style deployment now works by name**, including reasoning models (GPT-5.x, o-series, DeepSeek-R1) that reject `max_tokens` or a non-default temperature. A shared sender adapts parameters at runtime on HTTP 400 (`max_tokens` → `max_completion_tokens`, drops `temperature` / `response_format`) and retries — with no per-model setup.
+- **"Test connection"** now exercises the same parameter contract as real calls and surfaces the exact error body instead of a generic message.
+- **Optional "Reasoning model" toggle** in Advanced Settings skips the discovery round-trip; Claude-on-Foundry and Gemini keep their dedicated providers.
+
+---
+
 ## v1.20.1 — 2026-06-16
 
 **Fix — saving the Definition of Ready**
