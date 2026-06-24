@@ -6,6 +6,84 @@ icon: "sparkles"
 
 # Changelog
 
+## v1.30.0 — 2026-06-24
+
+**Harmonised buttons across every screen (EPIC T)**
+
+- Every interactive control now goes through the design-system **Button**, so the look stays consistent and theme-aware (light/dark) on every screen — no raw buttons left anywhere.
+- A clear **action hierarchy** signals intent at a glance: the Cockpit **Generate** is teal (the product's happy path), screen-level primary actions (Save, Test connection, Generate code, Push, Attach, Rewrite) are navy, secondary/remediation actions (Improve, Score, Re-score, Re-evaluate, Cancel/Confirm) are outlined, toggles are pills, and discreet links are ghost.
+- Keyboard users get an accessible **:focus-visible** ring. A guard test locks the invariant so a raw `<button>` can't silently creep back into a screen.
+
+---
+
+## v1.29.0 — 2026-06-23
+
+**The Quality Cockpit remembers your scope (EPIC S)**
+
+- The Cockpit now remembers the last **area path + iteration** you used and restores them when you come back, **per project**. The preference is personal (stored in your User scope, never shared with the team) and restored defensively — if a remembered area or iteration no longer exists, it's simply ignored, with no query against a phantom scope.
+
+---
+
+## v1.28.0 — 2026-06-23
+
+**Automated tests reach parity with manual (EPIC S)**
+
+- The Automated tests tab now offers the **same** generation controls as the manual screen: opt-in **linked work-item context**, **attachments** and a **pasted spec excerpt**, and **test count per typology** — all wired into code generation (enriched context + a best-effort per-typology count directive, filtered to the selected typologies).
+
+---
+
+## v1.27.0 — 2026-06-23
+
+**Redesigned Quality Cockpit (hybrid)**
+
+- The Cockpit opens with a **funnel** (backlog → scored → ready) and a **"Recommended action"** card that tells you what to do next for the current scope.
+- Stories are grouped into **four** DoR sections — **Ready**, **Needs improvement**, **Stale score**, **Not scored** — each with one primary action. A ready story has a single **Generate** button that opens a Manual / Automated menu; other states show their remediation with generation locked (🔒).
+- A compliant-but-**stale** story now sits in Stale score (not Ready) and can't be generated until re-evaluated, enforcing the single-entry-point gate.
+
+---
+
+## v1.26.0 — 2026-06-22
+
+**The Quality Cockpit is the single entry point to generation (EPIC S)**
+
+- The Manual and Automated tests screens no longer carry their own user-story list. You pick a **ready** story (DoR-compliant and up to date) in the Cockpit and choose **Generate → Manual / Automated**; the screen opens with the story preselected. With no preselection, the screen shows an explicit empty state with a **"Go to Cockpit"** button.
+- **"Analyze (INVEST)"** is removed from the generation screens — scoring stays centralised in the Cockpit; the PO panel keeps its INVEST analysis.
+
+---
+
+## v1.25.1 — 2026-06-22
+
+**Contextual typology selector**
+
+- The test-typology chips now appear **only** on Manual tests and Automated tests (hidden on Quality / Config / Help). Your selection stays shared and single — it governs both manual and automated generation and persists when you switch tabs.
+
+---
+
+## v1.25.0 — 2026-06-21
+
+**A DoR change flags your whole backlog — re-synced in one click, no LLM (EPIC R)**
+
+- Changing your Definition of Ready now flags **all** previously scored stories as **"Re-check compliance — the DoR changed"**, including those scored before this feature existed (a one-shot migration).
+- A new **"Re-evaluate whole iteration"** action recomputes compliance **cold across the iteration with no LLM call**, touching only the affected stories. Progress is reported *n/N*; a save failure is non-blocking.
+
+---
+
+## v1.24.0 — 2026-06-20
+
+**Fine-grained staleness — a DoR change no longer re-runs the LLM (EPIC R)**
+
+- TestForge now tells apart *the story changed* from *the Definition of Ready changed*. A story edit still triggers a full **re-score** (LLM); a DoR threshold/rule change instead flags the affected stories **"Re-check compliance"** and offers a **"Re-evaluate compliance"** button that recomputes conformity **cold, with no LLM call** (the INVEST score is independent of the threshold). If both changed, the re-score wins. DoR saves now record `updatedAt` / `updatedBy`.
+
+---
+
+## v1.23.1 — 2026-06-19
+
+**Idempotent quality writes (EPIC R)**
+
+- Re-scoring an already-scored story (alone or in a burst), or re-running an iteration analysis, no longer fails with a version error. Quality writes are now idempotent: each save reads the current document version and carries it, retrying transparently on a concurrent-write conflict (multiple tabs, "Analyze all"). A genuine save failure now shows a distinct message, separate from a scoring/LLM error.
+
+---
+
 ## v1.23.0 — 2026-06-18
 
 **Quality Cockpit (EPIC P)**
