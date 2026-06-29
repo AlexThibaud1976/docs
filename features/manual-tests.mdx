@@ -1,45 +1,46 @@
 ---
 title: "Manual Tests & Gherkin"
-description: "Generate, view, edit, and push manual test cases to ADO — no Test Plans licence required."
+description: "Choose your format upfront, edit a single representation, and push to ADO — no Test Plans licence required."
 icon: "list-check"
 ---
 
 # Manual Tests & Gherkin
 
-## Viewing tests: Steps vs Gherkin
+## Choose your format upfront
 
-Use the **Steps / Gherkin pills** at the top of the test list to switch view mode globally (all tests at once). The pills only appear if at least one generated test has a Gherkin scenario.
+On the **Manual tests** tab, pick the format **before** generating:
 
-## Export formats
+- **Classic steps** — Action / Expected Result rows.
+- **Gherkin BDD** — a `Given` / `When` / `Then` scenario.
 
-### Classic steps
+TestForge then generates a **single, editable representation** in the format you chose. There is no second copy and no post-generation view toggle, and there is no separate format choice at push time — the format is decided once, upfront.
 
-Each test is pushed with the standard ADO step format: Action \+ Expected Result columns. If a Gherkin scenario exists, it is also written to `System.Description` as a bonus.
+## Edit before push
 
-### Gherkin BDD
+Whatever the format, every case is editable in place:
 
-Each Gherkin line becomes an ADO step:
+- Edit the **title** inline.
+- Change the **priority** via the P1–P4 dropdown.
+- Edit the **content** — Action / Expected steps in Classic mode, or the **Given/When/Then scenario** (in an editable field) in Gherkin mode.
+- **Delete a test case** with the ✕ at the top right of the card.
 
-- `Given` / `When` / `And` (before Then) → **ActionStep**
-- `Then` / `And` / `But` (after Then) → **ValidateStep** with `Verify:` in the action field
-
-The full scenario is also written to `System.Description`.
-
-<Note>
-  Gherkin step mapping uses standard English keywords. French Gherkin keywords fall back silently to classic step format.
-</Note>
+The push always uses **what you edited**, never a frozen generated view.
 
 ## Pushing to ADO
 
-Tests are pushed via the **Tested By** relation. They appear in the **Test Coverage** tab of the work item.
+Tests are pushed via the **Tested By** relation and appear in the **Test Coverage** tab of the work item.
+
+In **Gherkin** mode, the ADO steps are derived from your edited scenario:
+
+- `Given` / `When` / `And` (before `Then`) → **Action** step.
+- `Then` / `And` / `But` (after `Then`) → **Validation** step (`Verify:` in the action field, the line text as the expected result).
+
+The full scenario is also written to `System.Description`.
+
+<Warning>
+  In Gherkin mode the push needs at least one recognisable `Given` / `When` / `Then` step. If the edited scenario has none, the push is **blocked** with an actionable message — there is no silent fallback to classic steps. Fix the scenario, then push.
+</Warning>
 
 <Info>
   You do **not** need an Azure DevOps **Test Plans** licence to push manual tests. A Basic licence is sufficient.
 </Info>
-
-## Editing tests before push
-
-- Edit the **title** inline
-- Change the **priority** via the P1–P4 dropdown
-- **Add or remove steps** using `+ Step` and ✕
-- **Delete a test case** with the ✕ at the top right of the card
