@@ -30,15 +30,15 @@ The push always uses **what you edited**, never a frozen generated view.
 
 Tests are pushed via the **Tested By** relation and appear in the **Test Coverage** tab of the work item.
 
-In **Gherkin** mode, the ADO steps are derived from your edited scenario:
+In **Gherkin** mode, the ADO steps are derived from your edited scenario — keyword recognition is **bilingual (English or French)**:
 
-- `Given` / `When` / `And` (before `Then`) → **Action** step.
-- `Then` / `And` / `But` (after `Then`) → **Validation** step (`Verify:` in the action field, the line text as the expected result).
+- `Given` / `When` / `And` (before `Then`) — or `Soit` / `Étant donné` / `Quand` / `Lorsque` / `Et` (before `Alors`) → **Action** step.
+- `Then` / `And` / `But` (after `Then`) — or `Alors` / `Et` / `Mais` (after `Alors`) → **Validation** step (`Verify:`, or `Vérifier :` for French stories, in the action field; the line text as the expected result).
 
 The full scenario is also written to `System.Description`.
 
 <Warning>
-  In Gherkin mode the push needs at least one recognisable `Given` / `When` / `Then` step. If the edited scenario has none, the push is **blocked** with an actionable message — there is no silent fallback to classic steps. Fix the scenario, then push.
+  In Gherkin mode the push needs at least one recognisable step — `Given` / `When` / `Then` **or** their French equivalents (`Soit` / `Étant donné` / `Quand` / `Lorsque` / `Alors`). If the edited scenario has none in either language, the push is **blocked** with an actionable message — there is no silent fallback to classic steps. Fix the scenario, then push.
 </Warning>
 
 <Info>
