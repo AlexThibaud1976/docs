@@ -6,6 +6,18 @@ icon: "sparkles"
 
 # Changelog
 
+## v1.31.0 — 2026-06-28
+
+**Mono-format manual test generation (EPIC U)**
+
+- Choose the manual test format — **Classic steps** or **Gherkin BDD** — **upfront**, before generating; TestForge produces a single, editable representation instead of parallel steps plus a read-only Gherkin view.
+- The Gherkin scenario is now **editable**, and the push **derives the ADO steps from your edited scenario** — blocked with an actionable message if it is no longer derivable (no silent push of an empty Test Case).
+- The Steps/Gherkin view toggle and the separate push-format toggle are gone — one source of truth.
+- **Cucumber generation now requires Gherkin mode**: cases generated as Classic steps prompt an explicit "regenerate in Gherkin mode" message (no extra LLM call, no mechanical conversion).
+- Fixes the **"Gherkin scenario not available"** gap on negative and edge cases — every case now carries a scenario, with the failure expressed in the `Then`.
+
+---
+
 ## v1.30.0 — 2026-06-24
 
 **Harmonised buttons across every screen (EPIC T)**
