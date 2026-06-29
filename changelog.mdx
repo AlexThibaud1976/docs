@@ -6,6 +6,16 @@ icon: "sparkles"
 
 # Changelog
 
+## v1.31.1 — 2026-06-29
+
+**Bilingual Gherkin keywords (EPIC U)**
+
+- French Gherkin scenarios are no longer blocked at push: TestForge now recognises both English keywords (`Given`/`When`/`Then`/`And`/`But`) **and** their French equivalents (`Soit`/`Étant donné`/`Quand`/`Lorsque`/`Alors`/`Et`/`Mais`) when deriving the ADO steps. Only a scenario with **no** recognised keyword in either language still blocks.
+- Generation keeps the **structural keywords in English** (BDD grammar) while the step text follows the user story language; the validation label is localised from the story language (`Vérifier :` for French stories, `Verify:` otherwise).
+- Fixes a latent regression of mono-format Gherkin (v1.31.0), where the parser recognised English keywords only and the classic-steps fallback had been removed.
+
+---
+
 ## v1.31.0 — 2026-06-28
 
 **Mono-format manual test generation (EPIC U)**
