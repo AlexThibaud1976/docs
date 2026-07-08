@@ -46,6 +46,24 @@ When you select a Cucumber framework:
 
 ---
 
+## Push to Azure Repos
+
+Once the code is generated (and the quality score reviewed), push it straight to a repository of your project.
+
+1. **Pick a repository** — TestForge lists the project's repositories and, on selection, loads that repository's **real branches**.
+2. **Base branch** — a selector over the repository's branches, preselected on its **default branch**. No free-text input, no assumed `main`.
+3. **Target branch** — in both **direct commit** and **Pull Request** modes, pick an existing branch or choose **"New branch…"**. The default is a new branch named `testforge/generated-tests/us-{id}`, automatically **uniquified** (`-2`, `-3`…) if the name is already taken. An indicator tells you whether the target **will be created** or **exists — the push will update this branch** (files already present on the branch are edited, not duplicated).
+4. **Confirm** — the confirmation restates the real target ("create X from Y" / "update X"). Nothing is written remotely before you confirm.
+5. On success, the commit SHA or the Pull Request link is displayed.
+
+<Info>
+  **Failure ≠ dead end.** ADO errors are decoded into actionable messages with one-click remedies: retry with a suffixed branch name (branch conflict), reload the branch list (branch not found), or open the repository's existing active Pull Request. Your generated files are kept, and retrying never re-runs the LLM generation.
+</Info>
+
+On an empty repository (or when the base branch cannot be resolved), the Pull Request mode is disabled with an explanation.
+
+---
+
 ## Getting started with your generated code
 
 After generation, TestForge displays a **"How to use this code"** panel with the exact steps for your framework. Here is the full reference for all 8 frameworks.

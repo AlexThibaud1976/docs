@@ -6,6 +6,17 @@ icon: "sparkles"
 
 # Changelog
 
+## v1.32.0 — 2026-07-08
+
+**Robust Azure Repos push & Pull Request creation (EPIC V)**
+
+- The push panel now works from your repository's **real branches**: the base branch is a selector preselected on the repo's **default branch** (no more assumed `main`, no free-text input), and the target branch — in both direct-commit and Pull Request modes — is an existing branch or a **new branch** with a uniquified default name (`testforge/generated-tests/us-{id}`, suffixed on collision).
+- **Correct git semantics**: the target ref is re-checked right before pushing; on an existing branch, each file is added or edited according to the branch's actual tree — no more `TF401028` conflicts on re-push, and never a silent orphan branch.
+- **Errors recover in place**: ADO errors are decoded into actionable messages with one-click remedies — retry with a suffixed name (branch conflict), reload branches (branch not found), open the existing active PR — and the raw ADO message is shown for anything else. Your generated files are kept, and retrying never re-runs the LLM generation.
+- **Guards**: Pull Request mode is disabled with an explanation on an empty repository or an unresolvable base branch; a PR whose source equals its target is blocked upfront; the PR is only created after a successful push.
+
+---
+
 ## v1.31.1 — 2026-06-29
 
 **Bilingual Gherkin keywords (EPIC U)**
