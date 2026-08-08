@@ -6,14 +6,47 @@ icon: "sparkles"
 
 # Changelog
 
+## v1.35.0 — 2026-08-08
+
+**Reliable, reproducible INVEST scoring (EPIC W)**
+
+- A 12-fixture evaluation campaign found the previous `temperature: 0.3` made scoring unreproducible: 6 out of 12 fixtures changed score between two identical runs, and 2 crossed the Definition-of-Ready threshold on unchanged content. INVEST scoring now runs at **`temperature: 0`** — only 2 out of 12 fixtures moved. Test generation and story improvement keep their own settings, where variability is legitimate.
+- **Re-score a ready story.** A story in the Ready section now exposes an explicit **Re-score** action next to **Generate**. Previously, once a story was Ready there was no way to score it again short of deleting and recreating the work item.
+- **Re-score the entire scope.** "Analyze all" can now target every story in scope, not just unscored ones — as a distinct action with a confirmation stating the story count, since the token cost is real. The default (unscored only) is unchanged.
+- **Borderline badge.** A story is flagged **Borderline** when flipping a single INVEST axis between `ok` and `weak` would be enough to cross the threshold. It is derived from the persisted statuses and your current threshold — no hardcoded margin, so it adapts to a custom Definition of Ready. Purely informative: it never changes eligibility, locking or the gate.
+- On a reasoning model, the adaptive sender still omits `temperature` by design (EPIC Q probe-and-retry); scoring reproducibility then depends on the provider's own determinism.
+
+---
+
+## v1.34.2 — 2026-08-08
+
+**Real titles, types and content for linked work items (EPIC W)**
+
+- **Linked work items showed the link-type name instead of the real title.** The panel was rendering the ADO relation's `attributes.name` — which is the *link type* (`Parent`, `Child`…), not the target's title, since expanding relations never returns the linked item's own fields. A single batch call now resolves the real title, type and description for every linked item.
+- **The linked-context feature never actually reached the model.** The same mixed-up field fed the LLM: checking a linked item sent the word "Parent" (about 2 tokens) instead of its content. Each checked item now contributes its real title and description, and the displayed token budget reflects that real content.
+- **Children, predecessors and successors were silently dropped.** They were listed and checkable, but only parents and related items were ever transmitted — checking any other category had no effect. All five categories now reach the generation context.
+- **Work item type is now shown** next to each linked item (Feature, Bug, User Story…) as a text badge, alongside the link category and the real title.
+- If the batch resolution fails, the panel stays usable — each reference falls back to `#id` alone and generation is never blocked.
+
+---
+
+## v1.34.0 — 2026-08-08
+
+**Uniform, navigable work item references (EPIC W)**
+
+- Every reference to a work item now renders as **`#id title`** and is clickable. A plain click opens the **native ADO work item dialog on top of the hub** — no page reload, no lost context; a Ctrl/Cmd/Shift or middle click opens it in a new browser tab, and the URL can be copied like any link.
+- Adopted on four surfaces: the **Quality Cockpit** (all four sections, including rows in error), the **selected story banners** on Manual tests and Automated tests, and the **linked work-item context panel**. In the Cockpit only the id is interactive, so it never competes with the per-story action; in the context panel the reference sits outside the checkbox, so clicking it never toggles your selection.
+- Link category labels (Parent, Related, Predecessor, Successor, Child) are now **localised** in French and English.
+
+---
+
 ## v1.32.0 — 2026-07-08
 
-**Robust Azure Repos push & Pull Request creation (EPIC V)**
+**Robust Azure Repos push and pull request creation (EPIC V)**
 
-- The push panel now works from your repository's **real branches**: the base branch is a selector preselected on the repo's **default branch** (no more assumed `main`, no free-text input), and the target branch — in both direct-commit and Pull Request modes — is an existing branch or a **new branch** with a uniquified default name (`testforge/generated-tests/us-{id}`, suffixed on collision).
-- **Correct git semantics**: the target ref is re-checked right before pushing; on an existing branch, each file is added or edited according to the branch's actual tree — no more `TF401028` conflicts on re-push, and never a silent orphan branch.
-- **Errors recover in place**: ADO errors are decoded into actionable messages with one-click remedies — retry with a suffixed name (branch conflict), reload branches (branch not found), open the existing active PR — and the raw ADO message is shown for anything else. Your generated files are kept, and retrying never re-runs the LLM generation.
-- **Guards**: Pull Request mode is disabled with an explanation on an empty repository or an unresolvable base branch; a PR whose source equals its target is blocked upfront; the PR is only created after a successful push.
+- **Pushing twice to the same branch no longer fails (TF401028).** The target branch tip is now re-read immediately before pushing, and each file is added or edited according to what the target branch actually contains.
+- **No more silent orphan branches (TF401398).** The base branch is picked from the repository's **real branches**, preselected on its default branch, instead of assuming `main`. A new branch is created in one pass from the chosen base tip.
+- **A push error is no longer a dead end.** Your form and generated files are preserved, and ADO's error is decoded into an actionable message with a clear next step instead of a raw failure.
 
 ---
 
