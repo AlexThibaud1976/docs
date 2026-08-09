@@ -6,6 +6,84 @@ icon: "sparkles"
 
 # Changelog
 
+## v1.39.1 — 2026-08-09
+
+**Configuration changes apply without a reload (EPIC X)**
+
+- **A saved provider change used to need a hard reload.** The hub read the LLM configuration once when it opened and never refreshed it, and the configuration screen had no way to announce a save. The stale value was handed to the Quality Cockpit and used for every provider call and for secret redaction. Since the provenance panel reads that same configuration to decide what to state, it could claim a story stayed inside your tenant while the newly-saved provider was in fact sending it to a third party — a false assurance on the one screen meant to prevent exactly that.
+- **Fixed by two complementary changes, neither sufficient alone.** Every code path that calls a provider now re-reads the configuration at the moment it acts, and a shared hook keeps the topbar, availability banner, cockpit actions and provenance panel current the instant a save succeeds. A one-off save callback was deliberately avoided: it would have left the next component to read the configuration with the identical defect.
+- **A failure now tells you what to do about it.** Five resolution hints — check your API key, wait and retry, check the endpoint, retry or switch model, retry or check your configuration — existed in the translations but were never displayed. Both error modals now show the hint next to the provider's message.
+
+---
+
+## v1.39.0 — 2026-08-09
+
+**Honest provenance and verdict traceability (EPIC AA)**
+
+- **The work item panel now states where your analysis actually runs**, for the provider you actually configured. With Azure OpenAI or Azure AI Foundry it confirms the analysis stays on your own resource, inside your tenant. With OpenAI, Mistral or Gemini it states plainly that data is sent to a named third-party host, outside your tenant. The Anthropic proxy gets a third, distinct case: relayed through your own proxy, then processed by a third party. **Never one promise reused regardless of provider.**
+- Only the host name is ever displayed — no API key, token or tenant identifier, by construction. The block also carries a standing reminder that nothing is written to Azure DevOps without your explicit approval, and a link to your LLM settings. It is permanent and non-blocking, a calmer register than the one-time consent warning shown when you first pick an external provider.
+- **The verdict carries its own context.** For a story with a saved score, the block shows the date and threshold **exactly as they were when the score was computed** — never today's values. An old score never silently inherits today's rules. The model used and the required criteria weren't recorded at scoring time in earlier versions; rather than backfill them from current settings and misrepresent history, the panel omits them for those scores and says so.
+- **Fixed: the exported iteration report always claimed data stayed in your tenant**, whichever provider produced the scores. That sentence circulated in wikis and chats. It now reflects the actual provider, using the same logic as the panel.
+
+---
+
+## v1.38.0 — 2026-08-09
+
+**Refreshed visual identity, dark theme wired (EPIC Z)**
+
+- **The hub's topbar no longer stacks a second dark bar** under Azure DevOps' own chrome. It adopts a light surface, with the active tab marked by the accent colour. Structure, provider badge and tab navigation are unchanged.
+- **Figures now render in an embedded monospace face.** Scores, counters, work item IDs, timestamps and token budgets align in columns and read as measurements rather than prose. The font is bundled in the extension (about 7 KB, Latin-1 subset) — no external request, so it works on air-gapped instances.
+- **Dark theme actually wired.** Host-theme detection already existed; the missing dark values are now defined, so every semantic colour has an explicit value in both themes.
+- **Four pre-existing contrast failures fixed** — muted text on the page background, the accent button's label, the error badge, and muted text on the dark hero surface all measured below the WCAG AA threshold for normal text. Found while adding a contrast guard, not introduced by this redesign.
+- Presentation only: no logic, data, Azure DevOps call or permission changed.
+
+---
+
+## v1.37.0 — 2026-08-09
+
+**Exportable iteration readiness report (EPIC Y)**
+
+- **A new "Generate report" action in the Quality Cockpit** produces a Markdown summary of the current scope: period and date, model used, stories ready out of the total, average score, the weakest INVEST axes ranked by how many stories they affect, and every non-compliant story with its **real** reason.
+- **The reason is never approximated.** A story scoring 83 against a threshold of 70 but missing a required criterion is reported as "missing required criterion", never as "below threshold". A story whose score is stale is reported as such, even if its old verdict still happens to hold.
+- The report can be copied to the clipboard or downloaded as a `.md` file, and stays readable pasted as-is into a wiki page or a team channel. It states that scores were computed inside your organization's tenant.
+- Everything is derived from data the Cockpit already holds: **no additional LLM call, no new endpoint, nothing stored.** The preview reuses the error modal component introduced in v1.36.0 — no new screen.
+
+---
+
+## v1.36.1 — 2026-08-09
+
+**Field-validation fixes on Gemini (EPIC X)**
+
+- **A batch summary could disagree with the failed rows on screen.** A story that failed once and later succeeded kept its failure mark indefinitely. Marks are now reset at the start of every batch, so the announced count and the marked rows cannot diverge.
+- **A malformed response showed a parser position instead of a next step.** Investigation ruled out truncation — the provider's own dashboard reported 100% success and output well under the configured cap; the model simply returned a complete but syntactically invalid body despite JSON mode being requested. The failure is now classified by the type of the underlying error, not by matching text, and reads "the model returned an invalid response — retry, or switch model", with the raw detail still available.
+- **The Gemini API key travelled in the request URL.** A key in a query string ends up in proxy logs, browser history, and any network trace exported to support. Gemini requests now authenticate through the vendor's documented header instead. The five other providers are unaffected.
+- **Worth knowing:** Google is retiring legacy Gemini API keys in favour of service-account-scoped ones from September 2026. A configuration working today may stop then — see the Help tab.
+
+---
+
+## v1.36.0 — 2026-08-09
+
+**Explicit provider errors and assisted model selection (EPIC X)**
+
+- **Every LLM failure is now surfaced.** A new dependency-free modal (focus trap, Escape to close, focus restored) states what failed, the provider's own message and a suggested fix — on "Test connection", on scoring a single story, and on code generation.
+- **A batch run never opens one modal per story.** Each failing row is flagged in place and exactly **one** summary modal appears at the end, with the processed count, the failed count and the dominant cause.
+- **Fixed: a stale score could pass for a fresh one.** A failed re-score left the previous score visible with nothing to indicate it hadn't just been computed. The row now marks it explicitly as a previous, non-refreshed score.
+- **Fixed: a story failing inside a batch showed nothing at all** — it stayed silently unscored, indistinguishable from one the batch hadn't reached yet.
+- **Assisted model selection outside Azure.** OpenAI, Mistral, Gemini and Anthropic offer a list of suggested models with an always-available free-text option; a model already saved outside the list is preserved, never overwritten. Azure OpenAI and Azure AI Foundry keep free-text entry — the deployment name is yours, no catalogue can know it.
+- **Defense in depth against secret leakage**: any error message or console log that echoed a raw URL or an authorization header is now scrubbed before being shown or logged.
+
+---
+
+## v1.35.3 — 2026-08-09
+
+**LLM transport delegated to each provider (EPIC X)**
+
+- **Four providers out of six were broken on scoring and test generation.** "Test connection" returned success for OpenAI, Mistral, Gemini and Anthropic, but INVEST scoring and both manual and automated generation failed — a shared helper applied the Azure OpenAI URL shape and header to every non-Foundry provider, a fallback its own comment scoped to the two Azure providers only.
+- **Each provider now carries its own transport.** Scoring and generation call the provider directly; every hand-built URL and header outside the providers is gone. "Test connection" and real calls share the same code path by construction, so this class of defect cannot silently reappear.
+- Azure OpenAI and Azure AI Foundry requests are **bit-for-bit unchanged**, verified by dedicated tests. Gemini and Anthropic keep their own native request and response formats rather than being forced into an OpenAI shape.
+
+---
+
 ## v1.35.0 — 2026-08-08
 
 **Reliable, reproducible INVEST scoring (EPIC W)**
