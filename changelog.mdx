@@ -6,6 +6,130 @@ icon: "sparkles"
 
 # Changelog
 
+## v1.50.0 — 2026-08-12
+
+**A non-compliance verdict that says why, not just "no" (EPIC AH)**
+
+- **A story scoring 83 against a 77 threshold showed READY, BORDERLINE and "Below threshold" at once.** The last one was simply false. Compliance has always meant *score at or above threshold **and** no failing required criterion* — unchanged — but the panel and the Cockpit had a single fixed label for every non-compliant story, whatever the real cause.
+- **The verdict now names its actual cause**: below threshold, unmet required criteria (named, by their real INVEST axis), or both. One shared function derives it from data already computed and now persisted alongside the score, and both surfaces render through that same function, so they cannot drift apart.
+- **Quality level and compliance verdict are now distinct, including for assistive technology.** The level (Ready / Needs improvement / Critical) comes from the score alone; the compliance verdict is what actually gates generation. The level can no longer be mistaken for permission to generate.
+- **Per-axis suggestions now follow your interface language too.** An English-interface reviewer got their justification in English but the suggestion right below it in French — the field was missed when the justification fix shipped in v1.49.0. Same mechanism, same single call, no retranslation.
+- The story detail drawer stops showing its own reference twice: the header title is now the clickable reference, and the duplicate in the footer is gone.
+
+---
+
+## v1.49.0 — 2026-08-11
+
+**The INVEST justification reads in your language, not the story's (EPIC AE3)**
+
+- **An English-interface reviewer reading a French story used to get the justification in French.** Technically it honoured the letter of "never translate story content" — but a justification isn't story content. It is analysis displayed in the tool and never written back to Azure DevOps.
+- **Each field in the schema sent to the model now names its own expected language**, right next to its placeholder, instead of one blanket instruction covering the whole response. A single global directive invites the model to quietly unify everything to one language — which is exactly what was happening.
+- The per-axis justification targets your interface language. **The rewritten description, acceptance criteria and generated tests still target the story's language, untouched.** Still one LLM call.
+- **A saved justification keeps the language it was written in.** Reading it later under a different interface language never retranslates it, and switching your interface language never marks a score stale. If the model drifts anyway, it is logged and nothing else — no retry, no rewrite, no error shown.
+- Three fixes ride along in the detail drawer: the block order matches the design (coverage before provenance), **all six INVEST axes now show their justification** instead of only the failing ones — you previously couldn't see *why* a passing axis passed — and the work-item reference carries the story title again instead of a bare `#298`.
+
+---
+
+## v1.48.0 — 2026-08-11
+
+**The Cockpit's reserved coverage column finally has something in it (EPIC AG)**
+
+- Every release since v1.47.1 carried a 120px column on "Ready to generate", "Stale score" and "Not scored", deliberately empty — filling it needed a relations call the Cockpit didn't make. **It now does.**
+- A fourth **"Covered by tests"** funnel card and the column itself show *n linked cases* or *no test*, loaded in the background after the first render so it is never blocking. The three existing cards keep their exact content.
+- The detail drawer gains a **Test coverage** block — linked cases, automated cases, and an estimated count of acceptance criteria still without a test — plus an **Open in Test Plans ↗** link. That estimate carries its uncertainty in its *type*, not just its label, so no surface can render it as a measured fact by accident.
+- One request resolves the whole visible scope: identifiers are merged across every story before a single call, and automation status rides along on that same request.
+- **A failed resolution leaves the indicators simply absent, never a misleading zero**, and never touches scoring, generation or the DoR gate.
+
+---
+
+## v1.47.0 – v1.47.2 — 2026-08-11
+
+**The Cockpit matches its reference design, column for column**
+
+- The visual direction landed in v1.44.0, but the Cockpit had drifted from its own mockup: summary cards squeezed instead of spanning the row, no gauge or caption, a numeric badge instead of a progress bar for the INVEST score, and — the part that actually broke the read — **four sections rendered two different ways, so the ID / Story / Score columns never lined up.**
+- All four sections now share one column-width contract, applied identically top to bottom, so a story's row means the same three columns wherever it appears. The tab is renamed **Cockpit**, the area and iteration pickers move to a compact pair top-right, and each section header gains a status dot.
+- The INVEST score reads as a bar with the number and a greyed-out threshold. **The reason a story needs work is now one sentence** — "Borderline — 1 INVEST axis tips the verdict", "Acceptance criteria not testable (V, T weak)" — derived from the same persisted statuses, never a new call.
+- **v1.47.1 and v1.47.2 close the drift that only appeared once "Stale score" and "Not scored" had rows in them**: three status badges overflowing a 190px cell, a "generation locked" notice firing on every row of three sections instead of once in the header, and a clipped "Re-evaluate compliance" action.
+- Purely presentational across all three releases — no scoring, generation or gate logic changed.
+
+---
+
+## v1.46.0 — 2026-08-11
+
+**Every input field now goes through the design system (EPIC AF)**
+
+- The previous visual refresh changed the product's tokens, but **a token only reaches an element that consumes it.** 24 raw `<input>` / `<select>` / `<textarea>` fields across 7 screens — 13 on Config alone — were still browser-drawn underneath the new palette. That is precisely what read as "basic, off-brand" on that screen.
+- They now all go through the same `Input` / `Select` / `Textarea` primitives, plus a new `Checkbox` primitive replacing five raw checkboxes. **A guard test blocks a raw field from creeping back in**, same pattern as the button guard from v1.30.0.
+- The auth-mode radios and the two sliders stay native by design, with only their appearance harmonised.
+- The base shadow on cards and panels is softer and applied consistently; small controls get a smaller corner radius. Both re-checked against the dark theme. No behaviour, colour or typography changed.
+
+---
+
+## v1.45.0 — 2026-08-11
+
+**Manual and Automated tests become one Studio, and confrontation has no exception left**
+
+- The two tabs are gone. **A single Studio tab holds both modes** behind an internal switch, with a permanent right-hand column showing the confrontation summary — identical / similar / new counts — while cases are still being edited.
+- **Constitution §14 ("single door to writing") is now absolute.** A story with zero existing test cases could previously write straight through, skipping confrontation entirely. Every generation now passes through the confrontation screen first, even when the tally is "0 identical · 0 similar · all new".
+- Each decision option (Create / Update / Ignore) states its consequence in the screen itself instead of leaving it to the label.
+- Sliders are gone from every generation screen, replaced by a −/value/+ stepper, same ranges.
+
+---
+
+## v1.44.0 – v1.44.1 — 2026-08-10
+
+**Teal Instrument visual direction, and confrontation before writing (EPIC AE)**
+
+- The "SaaS Arc" look is replaced by a **single-accent teal palette with self-hosted fonts**. The Quality Cockpit funnel is redrawn and a story-detail side drawer is added.
+- **The review-before-write window becomes a full-screen confrontation surface**, showing a real side-by-side diff against existing test cases before anything is written. The modal is gone, not just restyled.
+- **v1.44.1 inverts the translation guard.** A field check found French strings still surfacing in the English interface a full sprint after the v1.43.0 guard shipped — each slipped past the pattern-based check in its own way. Rather than adding more patterns, **every screen component is now enumerated and must consume the translation layer**, no exceptions without a stated reason.
+- A second, new guard compares each key's French and English value directly, catching a value present in both files but identical in both — translated in neither. Four such values fixed; no logic, condition or call changed.
+
+---
+
+## v1.43.0 — 2026-08-10
+
+**One language per screen, and a denser review window (EPIC AD4)**
+
+- A field demo surfaced screens mixing French and English — English strings next to French labels on the very same screen, twelve files affected. **Every screen label now comes from the translation layer, in both languages**, and an automated check blocks any literal string from creeping back in, with a short explicit list of justified exceptions.
+- The review-before-writing window introduced in v1.42.0 didn't hold up past a handful of cases. **Each case now collapses to a single line** — typology, qualification, title, actions — with a chevron to expand it; the side-by-side diff and full warning text appear only once expanded.
+- The banner carries a short title plus a one-line count of identical / similar / new cases, and the action footer stays outside the scrolling area.
+
+---
+
+## v1.42.0 — 2026-08-10
+
+**A guided write flow (EPIC AD)**
+
+- The review opens in **its own dedicated window** — focus trapped, Escape to close, focus restored — with a fixed footer, two pre-fill shortcuts, and a close confirmation once a decision has been made.
+- The bare write confirmation is replaced by **a report naming each case's real outcome** (created / updated / ignored), its real id, a direct link, the model and time used, and a "Generate more cases" button.
+- **Test-plan attachment becomes a question asked after writing**, rather than an immediate, unasked list.
+
+---
+
+## v1.41.0 – v1.41.1 — 2026-08-10
+
+**Review before writing (EPIC AC)**
+
+- Generated cases are now compared against those already attached to the story via the *Tested By* relation, and **qualified as identical, similar or new by lexical comparison — no extra model call.**
+- You decide per case: create, update or ignore. **The safest option is pre-selected**, and consequences (executed, hand-edited, automated, belongs to a plan) are surfaced before you commit to an update.
+- A single pluralization mechanism replaces eight approximate labels.
+- **v1.41.1 fixes the review screen's decisions not actually reaching the write step** — the screen was correct, the outcome wasn't.
+
+---
+
+## v1.40.0 – v1.40.1 — 2026-08-10
+
+**Test Plans authorization and diagnostic (EPIC AB)**
+
+- TestForge now declares the `vso.test` / `vso.test_write` scopes needed to reach Test Plans at all. **You will be asked to reauthorize the extension once after updating.**
+- **A diagnostic mistook a missing extension permission (401) for an absent organization licence (403)** — two very different problems with two very different fixes. Corrected.
+- Navigation links to the plan and the suite are shown after a successful attachment.
+- **v1.40.1 fixes suite creation** (a required parent suite was missing) and makes Tier 1 actually create its Test Case work items before attaching them.
+- **Worth knowing:** pushing manual tests to a story (the *Tested By* relation) has never required a Test Plans licence — an ADO Basic account is enough. The Test Plans licence unlocks suite-based organisation, which is optional.
+
+---
+
 ## v1.39.1 — 2026-08-09
 
 **Configuration changes apply without a reload (EPIC X)**
